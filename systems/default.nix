@@ -1,5 +1,5 @@
 {inputs, ...}: let
-  inherit (inputs) nixpkgs;
+  inherit (inputs) nixos-hardware nixpkgs;
 
   inherit (nixpkgs.lib) attrValues;
 
@@ -40,6 +40,6 @@ in {
   flake.nixosConfigurations = mkHost {
     system = "x86_64-linux";
     hostName = "clockwork";
-    modules = [];
+    modules = [nixos-hardware.nixosModules.msi-gl62];
   };
 }

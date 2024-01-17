@@ -13,15 +13,11 @@
         ${config.pre-commit.installationScript}
       '';
 
-      packages =
-        [
-          self'.formatter
-          # inputs'.agenix.packages.agenix
-          pkgs.just
-        ]
-        ++ lib.optionals (builtins.elem system lib.platforms.darwin) [
-          inputs'.nix-darwin.packages.darwin-rebuild
-        ];
+      packages = [
+        self'.formatter
+        # inputs'.agenix.packages.agenix
+        pkgs.just
+      ];
     };
     formatter = pkgs.alejandra;
     pre-commit.settings.hooks = {

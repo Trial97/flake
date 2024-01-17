@@ -52,7 +52,6 @@
   security.pam.services.lightdm.enableGnomeKeyring = true;
 
   services = {
-    blueman.enable = true;
     tumbler.enable = true;
 
     xserver = {

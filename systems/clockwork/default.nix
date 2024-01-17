@@ -11,10 +11,6 @@
     ./hardware-configuration.nix
   ];
 
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
   networking.hostName = "clockwork"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -24,24 +20,6 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
-
-  # Set your time zone.
-  time.timeZone = "Europe/Bucharest";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "ro_RO.UTF-8";
-    LC_IDENTIFICATION = "ro_RO.UTF-8";
-    LC_MEASUREMENT = "ro_RO.UTF-8";
-    LC_MONETARY = "ro_RO.UTF-8";
-    LC_NAME = "ro_RO.UTF-8";
-    LC_NUMERIC = "ro_RO.UTF-8";
-    LC_PAPER = "ro_RO.UTF-8";
-    LC_TELEPHONE = "ro_RO.UTF-8";
-    LC_TIME = "ro_RO.UTF-8";
-  };
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
