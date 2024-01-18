@@ -52,6 +52,10 @@ in {
     ffmpeg
     psmisc
     unzip
+
+    lsof
+    ntfs3g
+    playerctl
   ];
 
   services.openssh.enable = true;

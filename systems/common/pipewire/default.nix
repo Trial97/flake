@@ -2,6 +2,9 @@
   security.rtkit.enable = true;
   primaryUser.extraGroups = ["rtkit"];
 
+  # Enable sound with pipewire.
+  sound.enable = true;
+  hardware.pulseaudio.enable = false;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -10,16 +13,16 @@
     jack.enable = true;
   };
 
-  hm.services.pipewire = {
-    enable = true;
-    instances = {
-      compressor = {
-        config = ./compressor.conf;
-        extraPackages = [pkgs.calf];
-      };
-      desktop-source = {config = ./desktop-source.conf;};
-    };
-  };
+  # hm.services.pipewire = {
+  #   enable = true;
+  #   instances = {
+  #     compressor = {
+  #       config = ./compressor.conf;
+  #       extraPackages = [pkgs.calf];
+  #     };
+  #     desktop-source = {config = ./desktop-source.conf;};
+  #   };
+  # };
 
   environment.etc."wireplumber/main.lua.d/51-schiit.lua".text = ''
     rule = {

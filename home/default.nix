@@ -20,6 +20,7 @@ in {
       ./desktop.nix
       ./kitty.nix
       ./ranger.nix
+      ./wallpapers.nix
     ]
     ++ imp;
 }

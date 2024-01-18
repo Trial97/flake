@@ -16,6 +16,9 @@ in {
   home.pointerCursor = {
     name = "Adwaita";
     package = pkgs.gnome.gnome-themes-extra;
+    size = 1;
+    gtk.enable = true;
+    x11.enable = true;
   };
 
   gtk = {

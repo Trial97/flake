@@ -4,6 +4,7 @@
 
     ./bluetooth.nix
     ./boot.nix
+    ./environment.nix
     ./firefox.nix
     ./fonts.nix
     ./gaming.nix
@@ -15,6 +16,7 @@
     ./nix.nix
     ./nvd.nix
     ./pkgs.nix
+    ./pipewire
     ./qt
     ./regional.nix
     ./v4l2loopback.nix

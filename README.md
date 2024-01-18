@@ -2,24 +2,24 @@ Temporary Readme
 
 ToDo
 
-- create a wallpapaers repo
-- setup env
-- setup shell
-- ftrim enable
-- numlock on by default
-- mouse cursor
-- gtk theme
-- move notes
-- net tab
-- move progs.csv
-- create sway config
+- [ ]fix awesome config
+- [ ]create a wallpapaers repo
+- [x]setup env
+- [ ]setup shell
+- [x]ftrim enable
+- [ ]numlock on by default
+- [x]mouse cursor
+- [x]gtk theme
+- [ ]move notes
+- [ ]net tab
+- [ ]move progs.csv
+- [ ]create sway config
 
 # Config files and more
 
 ## Extra Resources
 
 - https://wiki.archlinux.org/title/List_of_applications/Other
-- https://github.com/Harshit-T/Wallpapers
 - https://github.com/Harshit-T/nightly
 - https://github.com/catppuccin/rofi
 - Thunderbird with Lightning -email

@@ -15,16 +15,23 @@
   };
 
   environment = {
-    systemPackages = lib.attrValues {
-      inherit
-        (pkgs)
-        brightnessctl
-        inotify-tools
-        libnotify
-        pavucontrol
-        skippy-xd
-        ;
-    };
+    systemPackages =
+      lib.attrValues {
+        inherit
+          (pkgs)
+          brightnessctl
+          inotify-tools
+          libnotify
+          pavucontrol
+          skippy-xd
+          pa_applet
+          upower
+          redshift
+          ;
+      }
+      ++ (with pkgs; [
+        xorg.xwininfo
+      ]);
   };
 
   programs = {
@@ -53,6 +60,7 @@
 
   services = {
     tumbler.enable = true;
+    upower.enable = true;
 
     xserver = {
       enable = true;
