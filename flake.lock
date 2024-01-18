@@ -1,5 +1,36 @@
 {
   "nodes": {
+    "catppuccin": {
+      "locked": {
+        "lastModified": 1705010618,
+        "narHash": "sha256-7mFUoNL0Ty/akEcXtAKueZbYbeDy0IOAS02w7ufgslU=",
+        "owner": "Stonks3141",
+        "repo": "ctp-nix",
+        "rev": "310ab70d9e690b641005ceafc6582305195c8711",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Stonks3141",
+        "repo": "ctp-nix",
+        "type": "github"
+      }
+    },
+    "catppuccin-qt5ct": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1679416147,
+        "narHash": "sha256-t/uyK0X7qt6qxrScmkTU2TvcVJH97hSQuF0yyvSO/qQ=",
+        "owner": "catppuccin",
+        "repo": "qt5ct",
+        "rev": "89ee948e72386b816c7dad72099855fb0d46d41e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "catppuccin",
+        "repo": "qt5ct",
+        "type": "github"
+      }
+    },
     "emacs": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -388,6 +419,8 @@
     },
     "root": {
       "inputs": {
+        "catppuccin": "catppuccin",
+        "catppuccin-qt5ct": "catppuccin-qt5ct",
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",
         "nixos-hardware": "nixos-hardware",

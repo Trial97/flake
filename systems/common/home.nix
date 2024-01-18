@@ -6,12 +6,10 @@
   username,
   ...
 }: let
-  inherit (pkgs) fetchgit;
-  inherit (builtins) attrValues;
   inherit (lib.lists) optional;
   inherit (lib.modules) mkAliasOptionModule;
 
-  inherit (inputs) home-manager;
+  inherit (inputs) catppuccin home-manager;
 in {
   imports = [
     (mkAliasOptionModule ["hm"] ["home-manager" "users" username])
@@ -31,15 +29,16 @@ in {
         ++ optional config.programs.wireshark.enable "wireshark"
         ++ optional config.virtualisation.libvirtd.enable "libvirtd"
         ++ optional config.virtualisation.podman.enable "podman";
+      shell = pkgs.zsh;
     };
     nix.settings.trusted-users = [username];
 
-    home-manager.users.${username} = {
-      # home.homeDirectory = config.users.users."${username}".home;
+    hm = {
+      home.homeDirectory = config.users.users."${username}".home;
       home.username = username;
 
-      # programs.home-manager.enable = true;
-      programs.bash.enable = true;
+      programs.home-manager.enable = true;
+      systemd.user.startServices = "sd-switch";
 
       home.stateVersion = config.system.stateVersion;
     };
@@ -47,9 +46,10 @@ in {
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;
-      extraSpecialArgs = {
-        inherit inputs;
-      };
+      extraSpecialArgs = {inherit inputs;};
+      sharedModules = [
+        catppuccin.homeManagerModules.catppuccin
+      ];
     };
   };
 }

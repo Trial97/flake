@@ -22,7 +22,6 @@
 
           ./common
           ./${hostName}
-          ./home.nix
           ../home
         ]
         # ++ (attrValues scrumpkgs.nixosModules)

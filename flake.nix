@@ -13,6 +13,12 @@
       url = "github:cachix/pre-commit-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    catppuccin.url = "github:Stonks3141/ctp-nix";
+    catppuccin-qt5ct = {
+      url = "github:catppuccin/qt5ct";
+      flake = false;
+    };
   };
 
   outputs = {flake-parts, ...} @ inputs:

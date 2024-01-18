@@ -36,15 +36,13 @@
         options.navigate = true;
       };
 
-      signing.key = null;
-
       extraConfig = {
         core.autocrlf = "input";
         color.ui = "auto";
         diff.colorMoved = "default";
         push.followTags = true;
-        pull.rebase = true;
-        init.defaultBranch = "main";
+        pull.rebase = false;
+        init.defaultBranch = "master";
         url = {
           "https://github.com/".insteadOf = "github:";
           "ssh://git@github.com/".pushInsteadOf = "github:";
