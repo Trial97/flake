@@ -17,7 +17,9 @@
 in {
   hm.imports =
     [
+      ./desktop.nix
       ./kitty.nix
+      ./ranger.nix
     ]
     ++ imp;
 }

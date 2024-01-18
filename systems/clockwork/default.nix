@@ -9,7 +9,9 @@
   # Include the results of the hardware scan.
   imports = [./hardware-configuration.nix];
 
+  hardware.enableRedistributableFirmware = true;
   powerManagement.cpuFreqGovernor = "powersave";
+  services.fwupd.enable = true;
   networking.hostName = "clockwork"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 

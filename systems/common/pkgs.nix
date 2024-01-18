@@ -47,6 +47,11 @@ in {
     ripgrep
     tree
     just
+
+    dig
+    ffmpeg
+    psmisc
+    unzip
   ];
 
   services.openssh.enable = true;
@@ -68,6 +73,7 @@ in {
   programs.partition-manager.enable = true;
   services.udisks2.enable = true;
   services.gvfs.enable = true;
+  programs.dconf.enable = true;
   hm = {
     programs.eza = {
       enable = true;

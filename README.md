@@ -37,6 +37,7 @@ ToDo
 - https://github.com/JavaCafe01/dotfiles
 - https://github.com/NobbZ/nixos-config
 - https://github.com/Atemu/nixos-config
+- https://github.com/luishfonseca/dotfiles
 
 # Toys
 
