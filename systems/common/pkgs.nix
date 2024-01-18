@@ -2,7 +2,9 @@
   lib,
   pkgs,
   ...
-}: {
+}: let
+  inherit (lib.modules) mkDefault;
+in {
   nixpkgs = {
     config.allowUnfree = true;
   };
@@ -36,7 +38,6 @@
     arandr
     dex
 
-    prismlauncher
     meld
 
     fd
@@ -45,8 +46,16 @@
     parallel
     ripgrep
     tree
+    just
   ];
 
+  services.openssh.enable = true;
+  virtualisation.podman = {
+    enable = mkDefault true;
+    dockerSocket.enable = true;
+  };
+
+  programs.adb.enable = true;
   programs.mtr.enable = true;
   programs.bandwhich.enable = true;
   programs.direnv = {
@@ -54,6 +63,8 @@
     nix-direnv.enable = true;
   };
   programs.partition-manager.enable = true;
+  services.udisks2.enable = true;
+  services.gvfs.enable = true;
   hm = {
     programs.eza = {
       enable = true;
@@ -72,4 +83,20 @@
       ];
     };
   };
+
+  security.sudo.extraRules = [
+    {
+      groups = ["wheel"];
+      commands = [
+        {
+          command = "/run/current-system/sw/bin/nixos-rebuild";
+          options = ["NOPASSWD"];
+        }
+        {
+          command = "/run/current-system/sw/bin/systemctl";
+          options = ["NOPASSWD"];
+        }
+      ];
+    }
+  ];
 }

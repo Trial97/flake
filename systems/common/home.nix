@@ -41,6 +41,7 @@ in {
       systemd.user.startServices = "sd-switch";
 
       home.stateVersion = config.system.stateVersion;
+      catppuccin.flavour = "mocha";
     };
 
     home-manager = {
