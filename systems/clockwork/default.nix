@@ -6,11 +6,10 @@
   pkgs,
   ...
 }: {
-  imports = [
-    # Include the results of the hardware scan.
-    ./hardware-configuration.nix
-  ];
+  # Include the results of the hardware scan.
+  imports = [./hardware-configuration.nix];
 
+  powerManagement.cpuFreqGovernor = "powersave";
   networking.hostName = "clockwork"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -20,6 +19,44 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+
+  fileSystems = {
+    "/media/DATA" = {
+      device = "/dev/sda1";
+      fsType = "ntfs3";
+      options = ["defaults" "noauto" "x-systemd.automount"];
+    };
+  };
+
+  xdg.portal = {
+    enable = true;
+    # wlr.enable = true;
+    extraPortals = [pkgs.xdg-desktop-portal-gtk];
+    configPackages = [pkgs.xdg-desktop-portal-gtk];
+  };
+
+  services.logind = {
+    lidSwitch = "suspend-then-hibernate";
+    extraConfig = ''
+      HandlePowerKey=suspend-then-hibernate
+      PowerKeyIgnoreInhibited=yes
+      LidSwitchIgnoreInhibited=no
+    '';
+  };
+
+  systemd.sleep.extraConfig = ''
+    HibernateDelaySec=10m
+  '';
+
+  virtualisation.libvirtd = {
+    enable = true;
+
+    qemu = {
+      ovmf.packages = [pkgs.OVMFFull.fd];
+      swtpm.enable = true;
+    };
+  };
+  virtualisation.spiceUSBRedirection.enable = true;
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;

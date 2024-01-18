@@ -50,6 +50,9 @@ in {
   ];
 
   services.openssh.enable = true;
+  services.gnome.gnome-keyring.enable = true;
+  services.flatpak.enable = true;
+
   virtualisation.podman = {
     enable = mkDefault true;
     dockerSocket.enable = true;
