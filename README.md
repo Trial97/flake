@@ -3,7 +3,7 @@ Temporary Readme
 ToDo
 
 - [ ]fix awesome config
-- [ ]create a wallpapaers repo
+- [x]create a wallpapaers repo
 - [x]setup env
 - [ ]setup shell
 - [x]ftrim enable

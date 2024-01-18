@@ -1,5 +1,5 @@
 {inputs, ...}: let
-  inherit (inputs) nixos-hardware nixpkgs;
+  inherit (inputs) nixos-hardware nixpkgs prismlauncher;
 
   inherit (nixpkgs.lib) attrValues;
 
@@ -7,7 +7,7 @@
     hostName,
     system,
     modules,
-    overlays ? [],
+    overlays ? [prismlauncher.overlays.default],
   }: {
     ${hostName} = nixpkgs.lib.nixosSystem {
       inherit system;

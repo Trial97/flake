@@ -19,6 +19,12 @@
       url = "github:catppuccin/qt5ct";
       flake = false;
     };
+
+    prismlauncher = {
+      url = "github:PrismLauncher/PrismLauncher";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.pre-commit-hooks.follows = "pre-commit-hooks";
+    };
   };
 
   outputs = {flake-parts, ...} @ inputs:
