@@ -15,6 +15,7 @@
     ./networking.nix
     ./nix.nix
     ./nvd.nix
+    ./openrazer.nix
     ./pkgs.nix
     ./pipewire
     ./qt

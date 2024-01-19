@@ -13,7 +13,8 @@ ToDo
 - [x] gtk theme
 - [ ] move notes
 - [ ] net tab
-- [ ] move progs.csv
+- [x] move progs.csv
+- [ ] setup hexchat
 - [ ] create sway config
 
 # Config files and more

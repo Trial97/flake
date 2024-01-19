@@ -25,7 +25,7 @@
       nil.enable = true;
       prettier = {
         enable = true;
-        excludes = ["flake.lock"];
+        excludes = ["flake.lock" ".+.frag"];
       };
     };
   };

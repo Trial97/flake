@@ -27,6 +27,8 @@
           pa_applet
           upower
           redshift
+          xdotool
+          xclip
           ;
       }
       ++ (with pkgs; [

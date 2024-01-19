@@ -57,6 +57,36 @@ in {
     ntfs3g
     playerctl
     papirus-icon-theme
+
+    cmus
+    gdb
+    polychromatic
+
+    mpv
+    vlc
+    unrar
+    unzip
+
+    yt-dlp
+    mediainfo
+    atool
+    fzf
+    highlight
+    moreutils
+    mpd
+    mpc-cli
+    fd
+    most
+    jq
+    ripgrep
+    ripgrep-all
+    thunderbird-bin
+    hexchat
+    gimp
+    gthumb
+    transmission-qt
+    progress
+    bat
   ];
 
   services.openssh.enable = true;

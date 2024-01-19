@@ -17,7 +17,10 @@
 in {
   hm.imports =
     [
+      ./cava.nix
+      ./cmus.nix
       ./desktop.nix
+      ./gdb.nix
       ./kitty.nix
       ./ranger.nix
       ./wallpapers.nix
