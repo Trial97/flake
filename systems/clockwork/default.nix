@@ -11,7 +11,6 @@
 
   hardware.enableRedistributableFirmware = true;
   powerManagement.cpuFreqGovernor = "powersave";
-  services.fwupd.enable = true;
   networking.hostName = "clockwork"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -37,13 +36,18 @@
     configPackages = [pkgs.xdg-desktop-portal-gtk];
   };
 
-  services.logind = {
-    lidSwitch = "suspend-then-hibernate";
-    extraConfig = ''
-      HandlePowerKey=suspend-then-hibernate
-      PowerKeyIgnoreInhibited=yes
-      LidSwitchIgnoreInhibited=no
-    '';
+  services = {
+    fwupd.enable = true;
+    logind = {
+      lidSwitch = "suspend-then-hibernate";
+      extraConfig = ''
+        HandlePowerKey=suspend-then-hibernate
+        PowerKeyIgnoreInhibited=yes
+        LidSwitchIgnoreInhibited=no
+      '';
+    };
+    # Enable the X11 windowing system.
+    xserver.enable = true;
   };
 
   systemd.sleep.extraConfig = ''
@@ -59,9 +63,6 @@
     };
   };
   virtualisation.spiceUSBRedirection.enable = true;
-
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
   # services.xserver.displayManager.lightdm.enable = true;
@@ -87,7 +88,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.11"; # Did you read the comment?
-  nix.settings.experimental-features = ["nix-command" "flakes"];
-
-  programs.zsh.enable = true;
 }

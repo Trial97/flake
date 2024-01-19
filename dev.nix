@@ -13,10 +13,11 @@
         ${config.pre-commit.installationScript}
       '';
 
-      packages = [
+      packages = with pkgs; [
         self'.formatter
         # inputs'.agenix.packages.agenix
-        pkgs.just
+        fzf
+        just
       ];
     };
     formatter = pkgs.alejandra;
@@ -27,6 +28,8 @@
         enable = true;
         excludes = ["flake.lock" ".+.frag"];
       };
+      # actionlint.enable = true;
+      statix.enable = true;
     };
   };
 }

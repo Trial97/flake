@@ -1,7 +1,4 @@
 {pkgs, ...}: {
-  security.rtkit.enable = true;
-  primaryUser.extraGroups = ["rtkit"];
-
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;

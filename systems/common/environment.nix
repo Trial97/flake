@@ -1,4 +1,4 @@
-{...}: {
+_: {
   environment.sessionVariables = rec {
     XDG_CACHE_HOME = "$HOME/.cache";
     XDG_CONFIG_HOME = "$HOME/.config";
@@ -8,7 +8,6 @@
     EDITOR = "nvim";
     TERMINAL = "kitty";
     BROWSER = "firefox";
-    PAGER = "most -s";
 
     # Not officially in the specification
     XDG_BIN_HOME = "$HOME/.local/bin";

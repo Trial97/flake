@@ -1,4 +1,5 @@
 {
+  config,
   lib,
   pkgs,
   ...
@@ -87,30 +88,40 @@ in {
     transmission-qt
     progress
     bat
+    man-pages
+    man-pages-posix
   ];
 
-  services.openssh.enable = true;
-  services.gnome.gnome-keyring.enable = true;
-  services.flatpak.enable = true;
+  services = {
+    openssh.enable = true;
+    gnome.gnome-keyring.enable = true;
+    flatpak.enable = true;
+    udisks2.enable = true;
+    gvfs.enable = true;
+  };
 
   virtualisation.podman = {
     enable = mkDefault true;
     dockerSocket.enable = true;
+    enableNvidia = lib.mkDefault (builtins.elem "nvidia" (config.services.xserver.videoDrivers or []));
+    extraPackages = with pkgs; [podman-compose];
+    autoPrune.enable = true;
   };
 
-  programs.adb.enable = true;
-  programs.mtr.enable = true;
-  programs.bandwhich.enable = true;
-  programs.direnv = {
-    enable = true;
-    nix-direnv.enable = true;
+  programs = {
+    adb.enable = true;
+    mtr.enable = true;
+    bandwhich.enable = true;
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
+    partition-manager.enable = true;
+
+    dconf.enable = true;
   };
-  programs.partition-manager.enable = true;
-  services.udisks2.enable = true;
-  services.gvfs.enable = true;
-  programs.dconf.enable = true;
-  hm = {
-    programs.eza = {
+  hm.programs = {
+    eza = {
       enable = true;
       icons = true;
 
@@ -119,7 +130,7 @@ in {
         "--smart-group"
       ];
     };
-    programs.fzf = {
+    fzf = {
       enable = true;
       enableFishIntegration = false; # we use jethrokuan/fzf instead
       defaultOptions = [

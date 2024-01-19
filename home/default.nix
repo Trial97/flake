@@ -22,6 +22,7 @@ in {
       ./gdb.nix
       ./kitty.nix
       ./ranger.nix
+      ./shell
       ./wallpapers.nix
     ]
     ++ imp;

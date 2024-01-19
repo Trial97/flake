@@ -17,8 +17,8 @@ in {
 
     home-manager.nixosModules.home-manager
   ];
-
   config = {
+    programs.fish.enable = true;
     primaryUser = {
       isNormalUser = true;
       # TODO: roles!
@@ -29,18 +29,20 @@ in {
         ++ optional config.programs.wireshark.enable "wireshark"
         ++ optional config.virtualisation.libvirtd.enable "libvirtd"
         ++ optional config.virtualisation.podman.enable "podman";
-      shell = pkgs.zsh;
+      shell = pkgs.fish;
     };
     nix.settings.trusted-users = [username];
 
     hm = {
-      home.homeDirectory = config.users.users."${username}".home;
-      home.username = username;
+      home = {
+        homeDirectory = config.users.users."${username}".home;
+        inherit username;
+        inherit (config.system) stateVersion;
+      };
 
       programs.home-manager.enable = true;
       systemd.user.startServices = "sd-switch";
 
-      home.stateVersion = config.system.stateVersion;
       catppuccin.flavour = "mocha";
     };
 

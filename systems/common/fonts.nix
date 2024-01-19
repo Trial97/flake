@@ -6,6 +6,13 @@
       monocraft
       fira-code
       roboto
+      corefonts
+      fira-code
+      (nerdfonts.override {fonts = ["FiraCode"];})
+      noto-fonts
+      noto-fonts-extra
+      noto-fonts-emoji
+      noto-fonts-cjk-sans
     ];
 
     enableDefaultPackages = true;
@@ -16,9 +23,13 @@
     };
 
     fontconfig = {
+      enable = true;
       cache32Bit = true;
       defaultFonts = {
+        serif = ["Noto Serif"];
         sansSerif = ["Fira Sans"];
+        # sansSerif = ["Noto Sans"];
+        emoji = ["Noto Color Emoji"];
         monospace = ["Fira Code"];
       };
     };

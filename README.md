@@ -2,17 +2,16 @@ Temporary Readme
 
 ToDo
 
-- [ ] fix awesome config
-- [ ] fix picom setup
+- [x] fix awesome config
+- [x] fix picom setup
 - [x] create a wallpapaers repo
 - [x] setup env
-- [ ] setup shell
+- [x] setup shell
 - [x] ftrim enable
-- [ ] numlock on by default
+- [x] numlock on by default
 - [x] mouse cursor
 - [x] gtk theme
 - [ ] move notes
-- [ ] net tab
 - [x] move progs.csv
 - [ ] setup hexchat
 - [ ] create sway config
