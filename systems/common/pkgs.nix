@@ -85,7 +85,6 @@ in {
     hexchat
     gimp
     gthumb
-    transmission-qt
     progress
     bat
     man-pages
