@@ -29,6 +29,7 @@
           redshift
           xdotool
           xclip
+          picom
           ;
       }
       ++ (with pkgs; [
@@ -89,7 +90,6 @@
       };
     };
     autorandr.enable = true;
-    picom.enable = true;
   };
 
   systemd.services."screen_lock@.service" = {

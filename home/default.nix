@@ -11,7 +11,6 @@
       ./awesome.nix
       ./rofi.nix
       ./autorandr.nix
-      ./picom.nix
     ]
     else [];
 in {

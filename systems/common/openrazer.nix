@@ -7,7 +7,7 @@
     users = [username];
     enable = true;
   };
-  services.hardware.openrgb.enable = true;
+  services.hardware.openrgb.enable = false;
 
   environment.systemPackages = with pkgs; [
     polychromatic
