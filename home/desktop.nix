@@ -24,8 +24,8 @@ in {
   gtk = {
     enable = true;
     iconTheme = {
-      package = pkgs.gnome.gnome-themes-extra;
-      name = "Adwaita";
+      package = pkgs.papirus-icon-theme;
+      name = "papirus-dark";
     };
     font = {
       name = "Fira Sans";

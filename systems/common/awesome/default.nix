@@ -35,6 +35,7 @@
   };
 
   programs = {
+    light.enable = true;
     nm-applet = {
       enable = true;
       indicator = false;
@@ -72,7 +73,7 @@
           enable = true;
           greeters.gtk.enable = true;
         };
-        # setupCommands = "numlockx on || true";
+        setupCommands = (lib.getExe pkgs.numlockx) + " on";
       };
 
       windowManager = {
@@ -87,17 +88,6 @@
     };
     autorandr.enable = true;
     picom.enable = true;
-  };
-  systemd.services.numLockOnTty = {
-    wantedBy = ["multi-user.target"];
-    serviceConfig = {
-      # /run/current-system/sw/bin/setleds -D +num < "$tty";
-      ExecStart = lib.mkForce (pkgs.writeShellScript "numLockOnTty" ''
-        for tty in /dev/tty{1..6}; do
-            ${pkgs.kbd}/bin/setleds -D +num < "$tty";
-        done
-      '');
-    };
   };
 
   systemd.services."screen_lock@.service" = {

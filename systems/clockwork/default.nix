@@ -23,7 +23,7 @@
   networking.networkmanager.enable = true;
 
   fileSystems = {
-    "/media/DATA" = {
+    "/media/Computer2" = {
       device = "/dev/sda1";
       fsType = "ntfs3";
       options = ["defaults" "noauto" "x-systemd.automount"];

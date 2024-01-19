@@ -56,6 +56,7 @@ in {
     lsof
     ntfs3g
     playerctl
+    papirus-icon-theme
   ];
 
   services.openssh.enable = true;
@@ -112,4 +113,5 @@ in {
       ];
     }
   ];
+  xdg.icons.enable = true;
 }
