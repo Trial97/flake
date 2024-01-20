@@ -14,6 +14,7 @@ ToDo
 - [ ] move notes
 - [x] move progs.csv
 - [ ] setup hexchat
+- [ ] fix systray icons
 - [ ] create sway config
 
 # Config files and more

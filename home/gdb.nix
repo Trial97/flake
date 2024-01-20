@@ -1,3 +1,3 @@
 _: {
-  xdg.configFile."gdb".source = ../dotfiles/gdb;
+  # xdg.configFile."gdb".source = ../dotfiles/gdb;
 }

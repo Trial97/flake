@@ -20,7 +20,7 @@
     ./pipewire
     ./qt
     ./regional.nix
-    ./transmission.nix
+    # ./transmission.nix
     ./v4l2loopback.nix
   ];
 }

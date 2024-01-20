@@ -82,6 +82,7 @@ in {
     ripgrep
     ripgrep-all
     thunderbird-bin
+    transmission-qt
     hexchat
     gimp
     gthumb
@@ -89,6 +90,7 @@ in {
     bat
     man-pages
     man-pages-posix
+    ninja
   ];
 
   services = {
@@ -118,6 +120,7 @@ in {
     partition-manager.enable = true;
 
     dconf.enable = true;
+    ccache.enable = true;
   };
   hm.programs = {
     eza = {

@@ -21,12 +21,9 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
-  fileSystems = {
-    "/media/Computer2" = {
-      device = "/dev/sda1";
-      fsType = "ntfs3";
-      options = ["defaults" "noauto" "x-systemd.automount"];
-    };
+  fileSystems."/mnt/Computer2" = {
+    device = "/dev/sda1";
+    fsType = "ntfs3";
   };
 
   xdg.portal = {
