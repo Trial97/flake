@@ -13,25 +13,19 @@ in {
     };
   };
 
-  home = {
-    pointerCursor = {
-      name = "Adwaita";
-      package = pkgs.gnome.gnome-themes-extra;
-      size = 1;
-      gtk.enable = true;
-      x11.enable = true;
-    };
-    file.".local/bin/code" = {
-      text = getExe pkgs.vscodium;
-      executable = true;
-    };
+  home.pointerCursor = {
+    name = "Adwaita";
+    package = pkgs.gnome.gnome-themes-extra;
+    size = 1;
+    gtk.enable = true;
+    x11.enable = true;
   };
 
   gtk = {
     enable = true;
     iconTheme = {
       package = pkgs.papirus-icon-theme;
-      name = "papirus-dark";
+      name = "Papirus-Dark";
     };
     font = {
       name = "Fira Sans";

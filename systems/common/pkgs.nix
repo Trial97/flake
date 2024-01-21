@@ -85,8 +85,9 @@ in {
     ripgrep-all
     thunderbird-bin
     transmission-qt
-    hexchat
+    # hexchat
     gimp
+    thunderbird-bin
     gthumb
     progress
     bat
