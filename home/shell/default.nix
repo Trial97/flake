@@ -16,6 +16,7 @@
       diff = "diff --color=auto";
       g = "git";
       gs = "g status";
+      code = "codium";
     };
   };
 }

@@ -29,6 +29,7 @@
 
       specialArgs = {
         inherit inputs;
+        inherit system;
         # lib' = scrumpkgs.lib;
         windowManager = "awesome";
         username = "trial";
