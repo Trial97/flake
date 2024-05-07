@@ -3,7 +3,8 @@
 ## ToDo
 
 - [ ] Populate the commands needed for first install
-- [ ] Test firts install
+- [ ] Test first install
+- [ ] Migrate from the old config
 
 ## Decisions
 
@@ -13,29 +14,37 @@
 
 ## Structure
 
-Current repository
-|-> home            ~ home manager configuration
-|-> system          ~ system configuration
-| |-> original      ~ the original system configuration (will be removed later)
-| |-> default.nix   ~ entry point to the system config
-| |-> git.nix       ~ git config
-| |-> home.nix      ~ homemanager bootstrap
-|-> .envrc          ~ the direnv config (used to autoinitalize the dev shell)
-|-> .gitignore      ~ files for git to ignore
-|-> dev.nix         ~ the shell configuration
-|-> flake.lock      ~ flake lock file(do not edit manualy:`just u`)
-|-> flake.nix       ~ flake entry point and the inputs location
-|-> justfile        ~ shortcuts for build commands
-|-> LICENSE         ~ project license
-|-> README.md       ~ documentaion of the flake
+```
+|-> home                ~ home manager configuration
+|-> system              ~ system configuration
+| |-> original          ~ the original system configuration (will be removed later)
+| |-> bluetooth.nix     ~ bluetooth config
+| |-> boot.nix          ~ boot config
+| |-> default.nix       ~ entry point to the system config
+| |-> environment.nix   ~ environment variables definition
+| |-> fonts.nix         ~ fonts definition
+| |-> git.nix           ~ git config
+| |-> home.nix          ~ homemanager bootstrap
+| |-> networking.nix    ~ firewall
+| |-> nix.nix           ~ nix related
+| |-> regional.nix      ~ locale settings
+|-> .envrc              ~ the direnv config (used to autoinitalize the dev shell)
+|-> .gitignore          ~ files for git to ignore
+|-> dev.nix             ~ the shell configuration
+|-> flake.lock          ~ flake lock file(do not edit manualy:`just u`)
+|-> flake.nix           ~ flake entry point and the inputs location
+|-> justfile            ~ shortcuts for build commands
+|-> LICENSE             ~ project license
+|-> README.md           ~ documentaion of the flake
+```
 
 ## Secrets
 
-| Secret    | Management | Reasoning                                                   |
-| :-------: | :--------: | :---------------------------------------------------------- |
-| ssh       | manual     | Most secret management schema needs one manual key at least |
-| gpg       | manual     | One more doesn't need to include it inside the flake        |
-| password  | manual     | Set it up on os install and forget about it                 |
+|  Secret  | Management | Reasoning                                                   |
+| :------: | :--------: | :---------------------------------------------------------- |
+|   ssh    |   manual   | Most secret management schema needs one manual key at least |
+|   gpg    |   manual   | One more doesn't need to include it inside the flake        |
+| password |   manual   | Set it up on os install and forget about it                 |
 
 ## First install steps
 
@@ -49,4 +58,4 @@ Current repository
 
 ## Reference
 
-- [1] https://nixos.wiki/wiki/Comparison_of_secret_managing_schemes
+- [1] <https://nixos.wiki/wiki/Comparison_of_secret_managing_schemes>

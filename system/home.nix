@@ -1,20 +1,19 @@
-{ config
-, inputs
-, lib
-, pkgs
-, username
-, ...
-}:
-let
+{
+  config,
+  inputs,
+  lib,
+  pkgs,
+  username,
+  ...
+}: let
   inherit (lib.lists) optional;
   inherit (lib.modules) mkAliasOptionModule;
 
   inherit (inputs) catppuccin home-manager;
-in
-{
+in {
   imports = [
-    (mkAliasOptionModule [ "hm" ] [ "home-manager" "users" username ])
-    (mkAliasOptionModule [ "primaryUser" ] [ "users" "users" username ])
+    (mkAliasOptionModule ["hm"] ["home-manager" "users" username])
+    (mkAliasOptionModule ["primaryUser"] ["users" "users" username])
 
     home-manager.nixosModules.home-manager
   ];
@@ -24,7 +23,7 @@ in
       isNormalUser = true;
       # TODO: roles!
       extraGroups =
-        [ "wheel" "audio" "video" "input" "dialout" ]
+        ["wheel" "audio" "video" "input" "dialout"]
         ++ optional config.networking.networkmanager.enable "networkmanager"
         ++ optional config.programs.adb.enable "adbusers"
         ++ optional config.programs.wireshark.enable "wireshark"
@@ -32,7 +31,7 @@ in
         ++ optional config.virtualisation.podman.enable "podman";
       shell = pkgs.fish;
     };
-    nix.settings.trusted-users = [ username ];
+    nix.settings.trusted-users = [username];
 
     hm = {
       home = {
@@ -50,7 +49,7 @@ in
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;
-      extraSpecialArgs = { inherit inputs; };
+      extraSpecialArgs = {inherit inputs;};
       sharedModules = [
         catppuccin.homeManagerModules.catppuccin
       ];

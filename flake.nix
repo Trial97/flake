@@ -4,7 +4,6 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
-    # nixpkgs-f2k.url = "github:moni-dz/nixpkgs-f2k";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -26,17 +25,17 @@
       inputs.pre-commit-hooks.follows = "pre-commit-hooks";
     };
 
+    # nixpkgs-f2k.url = "github:moni-dz/nixpkgs-f2k";
     # nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
   };
 
-  outputs = { flake-parts, ... } @ inputs:
-    flake-parts.lib.mkFlake { inherit inputs; } {
+  outputs = {flake-parts, ...} @ inputs:
+    flake-parts.lib.mkFlake {inherit inputs;} {
       imports = [
         inputs.pre-commit-hooks.flakeModule
         ./system
         ./dev.nix
       ];
-
-      systems = [ "x86_64-linux" ];
+      systems = ["x86_64-linux"];
     };
 }

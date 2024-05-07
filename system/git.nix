@@ -1,11 +1,12 @@
-{ pkgs
-, config
-, ...
+{
+  pkgs,
+  config,
+  ...
 }: {
   programs.gnupg.agent.enable = true;
 
   hm = {
-    home.packages = with pkgs; [ git-extras ];
+    home.packages = with pkgs; [git-extras];
 
     programs = {
       fish.shellAbbrs = {
