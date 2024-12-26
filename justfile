@@ -1,4 +1,5 @@
 alias b := build
+alias c := check
 alias dr := dry-run
 alias sw := switch
 alias t := test
@@ -29,3 +30,10 @@ update:
 
 build-vm:
     nix build ".#nixosConfigurations.clockwork.config.system.build.vm"
+
+check:
+    nix flake check \
+      --print-build-logs \
+      --show-trace \
+      --accept-flake-config \
+      --no-allow-import-from-derivation
