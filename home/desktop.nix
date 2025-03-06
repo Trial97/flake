@@ -1,12 +1,6 @@
-{
-  lib,
-  pkgs,
-  ...
-}:
-let
-  inherit (lib) getExe;
-in
-{
+{ lib, pkgs, ... }:
+let inherit (lib) getExe;
+in {
   xdg = {
     enable = true;
     userDirs = {
@@ -20,7 +14,7 @@ in
     package = pkgs.gnome-themes-extra;
     size = 1;
     gtk.enable = true;
-    x11.enable = true;
+    # x11.enable = true;
   };
 
   gtk = {
@@ -42,18 +36,15 @@ in
   };
 
   # Stop apps from generating fontconfig caches and breaking reproducibility
-  systemd.user.tmpfiles.rules = [
-    "R %C/fontconfig - - - - -"
-  ];
+  systemd.user.tmpfiles.rules = [ "R %C/fontconfig - - - - -" ];
 
-  home.packages = with pkgs; [
-    xdg-user-dirs
-    xdg-utils
-  ];
+  home.packages = with pkgs; [ xdg-user-dirs xdg-utils ];
 
   systemd.user.services."lxqt-policykit-agent" = {
     Unit.Description = "LXQt PolicyKit Agent";
     Service.ExecStart = getExe pkgs.lxqt.lxqt-policykit;
-    Install.WantedBy = [ "graphical-session.target" ];
+    # Install.WantedBy = [ "graphical-session.target" ];
+    Install.after = [ "graphical-session.target" ];
+    Install.wantedBy = [ "graphical-session.target" ];
   };
 }

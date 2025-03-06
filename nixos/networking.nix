@@ -4,6 +4,7 @@ _: {
     firewall = {
       allowedTCPPorts = [
         24800 # input-leap
+        22
         # 51413
       ];
       allowedUDPPorts = [

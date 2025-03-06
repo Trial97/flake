@@ -7,6 +7,10 @@
   environment.systemPackages = with pkgs; [
     nload
 
+    kitty
+    foot
+    sway
+
     #   pciutils
     #   usbutils
 

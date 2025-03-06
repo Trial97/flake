@@ -1,8 +1,4 @@
-{
-  pkgs,
-  ...
-}:
-{
+{ pkgs, ... }: {
   environment.sessionVariables = rec {
     XDG_CACHE_HOME = "$HOME/.cache";
     XDG_CONFIG_HOME = "$HOME/.config";
@@ -15,14 +11,12 @@
 
     # Not officially in the specification
     XDG_BIN_HOME = "$HOME/.local/bin";
-    PATH = [
-      "${XDG_BIN_HOME}"
-    ];
+    PATH = [ "${XDG_BIN_HOME}" ];
   };
   environment.localBinInPath = true;
   xdg.portal = {
     enable = true;
-    # wlr.enable = true;
+    wlr.enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
     configPackages = [ pkgs.xdg-desktop-portal-gtk ];
   };
