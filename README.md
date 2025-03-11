@@ -67,8 +67,7 @@
 
 #weird mounting stuff
 
-To start VM:
-`just vm&&./result/bin/run-clockwork-vm -virtfs local,path=/home/trial/Projects/nix2/,mount_tag=host_serve,security_model=none`
 
 On VM:`mount -t 9p -o trans=virtio,version=9p2000.L,rw host_serve /mnt/flake`
-sudo mount -t 9p -o trans=virtio my-share /mnt/shared
+`sudo mount -t 9p -o trans=virtio my-share /mnt/shared`
+
