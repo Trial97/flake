@@ -16,7 +16,7 @@
     diskSize = 10 * 1024;
   };
   virtualisation.vmVariant = {
-    # services.xserver.enable = false;
+    services.xserver.enable = false;
 
     virtualisation = {
       diskSize = 10 * 1024;

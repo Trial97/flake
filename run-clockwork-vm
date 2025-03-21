@@ -1,22 +1,24 @@
 #! /usr/bin/env bash
 
-set -e
+set -ex
 
-ISO_PATH=${ls ./*.iso | head -n 1}
+ISO_PATH=$(ls ./*.iso | head -n 1)
+ISO_PATH=$(realpath "${ISO_PATH}")
 
 # Create an empty ext4 filesystem image. A filesystem image does not
 # contain a partition table but just a filesystem.
 createEmptyFilesystemImage() {
-  local name=$1
-  local size=$2
-  local temp=$(mktemp)
-  qemu-img create -f raw "$temp" "$size"
-  mkfs.ext4 -L nixos "$temp"
-  qemu-img convert -f raw -O qcow2 "$temp" "$name"
-  rm "$temp"
+    local name=$1
+    local size=$2
+    local temp=$(mktemp)
+    qemu-img create -f raw "$temp" "$size"
+    mkfs.ext4 -L nixos "$temp"
+    qemu-img convert -f raw -O qcow2 "$temp" "$name"
+    rm "$temp"
 }
 
-NIX_DISK_IMAGE=$(readlink -f "${NIX_DISK_IMAGE:./clockwork.qcow2}") || test -z "$NIX_DISK_IMAGE"
+NIX_DISK_IMAGE=$(readlink -f "${NIX_DISK_IMAGE:-/mnt/Clockwork/VirtualBoxes/clockwork.qcow2}") || test -z "$NIX_DISK_IMAGE"
+NIX_DISK_IMAGE=$(readlink -f "${NIX_DISK_IMAGE:-./clockwork.qcow2}") || test -z "$NIX_DISK_IMAGE"
 
 if test -n "$NIX_DISK_IMAGE" && ! test -e "$NIX_DISK_IMAGE"; then
     echo "Disk image do not exist, creating the virtualisation disk image..."

@@ -1,4 +1,10 @@
-{ config, lib, pkgs, inputs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
 let
   inherit (lib) getExe mapAttrsToList singleton;
   mkExec = keyCombo: exec: { ${keyCombo} = "exec ${exec}"; };
@@ -7,14 +13,21 @@ let
     "${mod}+Shift+${key}" = "move ${direction}";
     "${mod}+Ctrl+${key}" = "move workspace output ${direction}";
   };
-  mkWorkspaceKeys = mod: workspace:
-    let key = builtins.substring 0 1 workspace;
-    in {
+  mkWorkspaceKeys =
+    mod: workspace:
+    let
+      key = builtins.substring 0 1 workspace;
+    in
+    {
       "${mod}+${key}" = "workspace ${workspace}";
       "${mod}+Shift+${key}" = "move container to workspace ${workspace}";
     };
-in {
-  primaryUser.extraGroups = [ "video" "input" ];
+in
+{
+  primaryUser.extraGroups = [
+    "video"
+    "input"
+  ];
 
   environment.sessionVariables = {
     "_JAVA_AWT_WM_NONREPARENTING" = "1";
@@ -36,7 +49,7 @@ in {
       config = {
         terminal = "uwsm app -T";
         # terminal = "kitty";
-        startup = [{ command = "uwsm finalize"; }];
+        startup = [ { command = "uwsm finalize"; } ];
         modifier = "Mod1";
 
         input."type:keyboard" = {
@@ -45,7 +58,9 @@ in {
           xkb_numlock = "enabled";
         };
 
-        output."*" = { bg = "${inputs.wallpaper}/forest_fox.jpg fill"; };
+        output."*" = {
+          bg = "${inputs.wallpaper}/forest_fox.jpg fill";
+        };
 
         window = {
           border = 4;
@@ -54,8 +69,7 @@ in {
             # TODO: other roles
             {
               criteria.app_id = "popup_pulsemixer";
-              command =
-                "floating enable; sticky enable; resize set 800 600; border pixel";
+              command = "floating enable; sticky enable; resize set 800 600; border pixel";
             }
             {
               criteria.app_id = "net.sapples.LiveCaptions";
@@ -75,75 +89,91 @@ in {
           size = 10.0;
         };
 
-        keybindings = let
-          swayConf = config.hm.wayland.windowManager.sway.config;
-          # TODO; role
-          wobSock = "$XDG_RUNTIME_DIR/wob.sock";
+        keybindings =
+          let
+            swayConf = config.hm.wayland.windowManager.sway.config;
+            # TODO; role
+            wobSock = "$XDG_RUNTIME_DIR/wob.sock";
 
-          mod = swayConf.modifier;
+            mod = swayConf.modifier;
 
+          in
           # mpc = getExe pkgs.mpc-cli;
           # pamixer = getExe pkgs.pamixer;
           # sed = getExe pkgs.gnused;
           # brightnessctl = getExe pkgs.brightnessctl;
-        in lib.mkMerge ([
-          (mkExec "${mod}+Return" swayConf.terminal)
-          (mkExec "${mod}+d" swayConf.menu)
-          (mkExec "${mod}+Ctrl+q" "loginctl lock-session")
-          # TODO: role
-          # (mkExec "XF86AudioStop" "${mpc} stop")
-          # (mkExec "XF86AudioPlay" "${mpc} toggle")
-          # (mkExec "XF86AudioPause" "${mpc} toggle")
-          # (mkExec "XF86AudioNext" "${mpc} next")
-          # (mkExec "XF86AudioPrev" "${mpc} prev")
-          # # TODO: role
-          # (mkExec "XF86AudioMute" "${pamixer} -t && ${pamixer} --get-volume > ${wobSock}")
-          # (mkExec "XF86AudioRaiseVolume" "${pamixer} -ui 2 && ${pamixer} --get-volume > ${wobSock}")
-          # (mkExec "XF86AudioLowerVolume" "${pamixer} -ud 2 && ${pamixer} --get-volume > ${wobSock}")
-          # # TODO: role
-          # (mkExec "Shift+XF86AudioRaiseVolume" "${mpc} vol +2 && ${mpc} vol | ${sed} 's|n/a|0%|g;s/[^0-9]*//g' > ${wobSock}")
-          # (mkExec "Shift+XF86AudioLowerVolume" "${mpc} vol -2 && ${mpc} vol | ${sed} 's|n/a|0%|g;s/[^0-9]*//g' > ${wobSock}")
-          # # TODO: role
-          # (mkExec "XF86MonBrightnessDown" "${brightnessctl} set 5%- | ${sed} -En 's/.*\\(([0-9]+)%\\).*/\\1/p' > ${wobSock}")
-          # (mkExec "XF86MonBrightnessUp" "${brightnessctl} set 5%+ | ${sed} -En 's/.*\\(([0-9]+)%\\).*/\\1/p' > ${wobSock}")
-        ] ++ (map (mkWorkspaceKeys mod) [ "1" "2" "3" "4" "5" "6" "7" "8" "9" ])
-          ++ (mapAttrsToList (mkDirectionKeys mod) {
-            ${swayConf.left} = "left";
-            ${swayConf.right} = "right";
-            ${swayConf.up} = "up";
-            ${swayConf.down} = "down";
-            "Left" = "left";
-            "Right" = "right";
-            "Up" = "up";
-            "Down" = "down";
-          }) ++ (singleton {
-            "${mod}+q" = "kill";
-            "${mod}+Shift+c" = "reload";
-            "${mod}+r" = "mode resize";
+          lib.mkMerge (
+            [
+              (mkExec "${mod}+Return" swayConf.terminal)
+              (mkExec "${mod}+d" swayConf.menu)
+              (mkExec "${mod}+Ctrl+q" "loginctl lock-session")
+              # TODO: role
+              # (mkExec "XF86AudioStop" "${mpc} stop")
+              # (mkExec "XF86AudioPlay" "${mpc} toggle")
+              # (mkExec "XF86AudioPause" "${mpc} toggle")
+              # (mkExec "XF86AudioNext" "${mpc} next")
+              # (mkExec "XF86AudioPrev" "${mpc} prev")
+              # # TODO: role
+              # (mkExec "XF86AudioMute" "${pamixer} -t && ${pamixer} --get-volume > ${wobSock}")
+              # (mkExec "XF86AudioRaiseVolume" "${pamixer} -ui 2 && ${pamixer} --get-volume > ${wobSock}")
+              # (mkExec "XF86AudioLowerVolume" "${pamixer} -ud 2 && ${pamixer} --get-volume > ${wobSock}")
+              # # TODO: role
+              # (mkExec "Shift+XF86AudioRaiseVolume" "${mpc} vol +2 && ${mpc} vol | ${sed} 's|n/a|0%|g;s/[^0-9]*//g' > ${wobSock}")
+              # (mkExec "Shift+XF86AudioLowerVolume" "${mpc} vol -2 && ${mpc} vol | ${sed} 's|n/a|0%|g;s/[^0-9]*//g' > ${wobSock}")
+              # # TODO: role
+              # (mkExec "XF86MonBrightnessDown" "${brightnessctl} set 5%- | ${sed} -En 's/.*\\(([0-9]+)%\\).*/\\1/p' > ${wobSock}")
+              # (mkExec "XF86MonBrightnessUp" "${brightnessctl} set 5%+ | ${sed} -En 's/.*\\(([0-9]+)%\\).*/\\1/p' > ${wobSock}")
+            ]
+            ++ (map (mkWorkspaceKeys mod) [
+              "1"
+              "2"
+              "3"
+              "4"
+              "5"
+              "6"
+              "7"
+              "8"
+              "9"
+            ])
+            ++ (mapAttrsToList (mkDirectionKeys mod) {
+              ${swayConf.left} = "left";
+              ${swayConf.right} = "right";
+              ${swayConf.up} = "up";
+              ${swayConf.down} = "down";
+              "Left" = "left";
+              "Right" = "right";
+              "Up" = "up";
+              "Down" = "down";
+            })
+            ++ (singleton {
+              "${mod}+q" = "kill";
+              "${mod}+Shift+c" = "reload";
+              "${mod}+r" = "mode resize";
 
-            "${mod}+w" = "layout toggle tabbed split";
-            "${mod}+e" = "layout toggle split";
+              "${mod}+w" = "layout toggle tabbed split";
+              "${mod}+e" = "layout toggle split";
 
-            "${mod}+f" = "fullscreen toggle";
-            "${mod}+Shift+f" = "fullscreen toggle global";
+              "${mod}+f" = "fullscreen toggle";
+              "${mod}+Shift+f" = "fullscreen toggle global";
 
-            "${mod}+Space" = "focus mode_toggle";
-            "${mod}+Shift+Space" = "floating toggle";
+              "${mod}+Space" = "focus mode_toggle";
+              "${mod}+Shift+Space" = "floating toggle";
 
-            "${mod}+a" = "focus parent";
-          }));
+              "${mod}+a" = "focus parent";
+            })
+          );
       };
     };
-    # xdg.configFile."uwsm/default-id".text = ''
-    #   sway-uwsm.desktop
-    # '';
-    # programs.fish.interactiveShellInit = lib.mkOrder 2000 ''
-    #   test -n "$XDG_SESSION_TYPE" -a "$XDG_SESSION_TYPE" = "tty" -a -n "$XDG_VTNR" -a "$XDG_VTNR" -eq 1; and uwsm check may-start; and begin
-    #     exec systemd-cat -t uwsm-start uwsm start -S -F default
-    #   end
-    # '';
+    xdg.configFile."uwsm/default-id".text = ''
+      sway-uwsm.desktop
+    '';
+    programs.fish.interactiveShellInit = lib.mkOrder 2000 ''
+      test -n "$XDG_SESSION_TYPE" -a "$XDG_SESSION_TYPE" = "tty" -a -n "$XDG_VTNR" -a "$XDG_VTNR" -eq 1; and uwsm check may-start; and begin
+        exec systemd-cat -t uwsm-start uwsm start -S -F default
+      end
+    '';
   };
-  #   services.dbus.implementation = "broker";
+  services.dbus.implementation = "broker";
 
   services.displayManager.enable = true;
   programs.uwsm = {
@@ -151,8 +181,8 @@ in {
     waylandCompositors.sway = {
       prettyName = "Sway";
       comment = "Sway with systemd";
-      binPath = (getExe config.hm.wayland.windowManager.sway.package)
-        + " &>> /home/trial/log.txt";
+      binPath = (getExe config.hm.wayland.windowManager.sway.package) + " &>> /home/trial/log.txt";
     };
   };
+  systemd.user.targets.nixos-fake-graphical-session.enable = false;
 }

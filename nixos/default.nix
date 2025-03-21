@@ -1,4 +1,5 @@
-{ hostName, ... }: {
+{ hostName, ... }:
+{
   imports = [
     ./${hostName}
     ./boot.nix
@@ -6,7 +7,7 @@
 
     ./qt
 
-    ./descktopManager.nix
+    ./displayManager.nix
 
     # ./bluetooth.nix
     ./environment.nix
@@ -34,11 +35,9 @@
     ports = [ 22 ];
     settings = {
       PasswordAuthentication = true;
-      AllowUsers =
-        null; # Allows all users by default. Can be [ "user1" "user2" ]
+      AllowUsers = null; # Allows all users by default. Can be [ "user1" "user2" ]
       UseDns = true;
-      PermitRootLogin =
-        "prohibit-password"; # "yes", "without-password", "prohibit-password", "forced-commands-only", "no"
+      PermitRootLogin = "prohibit-password"; # "yes", "without-password", "prohibit-password", "forced-commands-only", "no"
     };
   };
 }
