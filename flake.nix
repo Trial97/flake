@@ -193,6 +193,10 @@
       url = "github:Trial97/wallpapers?submodules=1";
       flake = false;
     };
+    app2unit = {
+      url = "github:Vladimir-csp/app2unit";
+      flake = false;
+    };
   };
 
 }

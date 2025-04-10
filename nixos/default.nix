@@ -9,9 +9,9 @@
 
     ./displayManager.nix
 
-    # ./bluetooth.nix
+    ./bluetooth.nix
     ./environment.nix
-    # ./firefox.nix
+    ./firefox.nix
     ./fonts.nix
     # ./gaming.nix
     ./git.nix
@@ -21,11 +21,10 @@
     ./nix.nix
     ./nvd.nix
     # ./openrazer.nix
-    # ./pipewire.nix
+    ./pipewire.nix
     ./pkgs.nix
     ./regional.nix
     ./sway.nix
-    # ./transmission.nix
     ./v4l2loopback.nix
     ./virtualisation.nix
   ];

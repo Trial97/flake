@@ -41,6 +41,15 @@ in
     extraPackages = [ ];
   };
 
+  environment.systemPackages = [
+    (pkgs.runCommand "app2unit" { } ''
+      mkdir -p $out/bin
+      cp ${inputs.app2unit}/app2unit $out/bin/app2unit
+      chmod +x $out/bin/app2unit
+    '')
+  ];
+
+  xdg.terminal-exec.enable = true;
   hm = {
     wayland.windowManager.sway = {
       enable = true;
@@ -48,7 +57,6 @@ in
       systemd.enable = false;
       config = {
         terminal = "uwsm app -T";
-        # terminal = "kitty";
         startup = [ { command = "uwsm finalize"; } ];
         modifier = "Mod1";
 
