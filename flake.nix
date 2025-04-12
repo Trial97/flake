@@ -187,7 +187,6 @@
     prismlauncher = {
       url = "github:PrismLauncher/PrismLauncher";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-compat.follows = "";
     };
     wallpaper = {
       url = "github:Trial97/wallpapers?submodules=1";
