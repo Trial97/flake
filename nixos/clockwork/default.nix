@@ -1,4 +1,4 @@
-{ ... }:
+_:
 # { inputs, ... }:
 # let inherit (inputs) nixos-hardware;in
 {

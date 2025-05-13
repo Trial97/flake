@@ -111,7 +111,12 @@
               actionlint.enable = true;
               statix.enable = true;
               deadnix.enable = true;
-              typos.enable = true;
+              typos = {
+                enable = true;
+                settings.configuration = ''
+                  [default.extend-words]
+                  ba = "ba"'';
+              };
               markdownlint.enable = true;
             };
           };
@@ -171,6 +176,16 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
+
+    flake-compat = {
+      url = "github:edolstra/flake-compat";
+      flake = false;
+    };
+    gitignore = {
+      url = "github:hercules-ci/gitignore.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     catppuccin = {
       url = "github:catppuccin/nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -185,7 +200,11 @@
     };
     git-hooks-nix = {
       url = "github:cachix/git-hooks.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-compat.follows = "flake-compat";
+        gitignore.follows = "gitignore";
+      };
     };
     prismlauncher = {
       url = "github:PrismLauncher/PrismLauncher";
@@ -201,7 +220,10 @@
     };
     inhibridge = {
       url = "git+https://codeberg.org/Scrumplex/inhibridge.git";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        git-hooks.follows = "git-hooks-nix";
+      };
     };
   };
 

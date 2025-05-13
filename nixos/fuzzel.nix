@@ -15,7 +15,7 @@
       settings = {
         main = {
           font = "Monocraft:size=13";
-          terminal = config.hm.wayland.windowManager.sway.config.terminal;
+          inherit (config.hm.wayland.windowManager.sway.config) terminal;
           # launch-prefix = "uwsm app --";
           launch-prefix = "app2unit --fuzzel-compat --";
         };

@@ -1,6 +1,8 @@
 { lib, pkgs, ... }:
-let inherit (lib) getExe;
-in {
+let
+  inherit (lib) getExe;
+in
+{
   xdg = {
     enable = true;
     userDirs = {
@@ -38,7 +40,10 @@ in {
   # Stop apps from generating fontconfig caches and breaking reproducibility
   systemd.user.tmpfiles.rules = [ "R %C/fontconfig - - - - -" ];
 
-  home.packages = with pkgs; [ xdg-user-dirs xdg-utils ];
+  home.packages = with pkgs; [
+    xdg-user-dirs
+    xdg-utils
+  ];
 
   systemd.user.services."lxqt-policykit-agent" = {
     Unit.Description = "LXQt PolicyKit Agent";

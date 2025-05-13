@@ -14,12 +14,16 @@
     #   systemd-boot.configurationLimit = 5; # Keep last 5 generations
     # };
 
-    loader.grub.enable = true;
-    loader.grub.device = "/dev/vda";
-    loader.grub.useOSProber = true;
+    loader.grub = {
+      enable = true;
+      device = "/dev/vda";
+      useOSProber = true;
+    };
 
-    initrd.verbose = false;
-    initrd.systemd.enable = true;
+    initrd = {
+      verbose = false;
+      systemd.enable = true;
+    };
     consoleLogLevel = 0;
     kernelParams = [
       "quiet"
