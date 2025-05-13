@@ -6,21 +6,24 @@
     kernelPackages = pkgs.linuxKernel.packages.linux_zen;
 
     # loader = {
+    #   grub.enable = false;
     #   systemd-boot.enable = true;
     #   efi.canTouchEfiVariables = true;
-    #   timeout = 0;
+    #   efi.efiSysMountPoint = "/boot";
+    #   # timeout = 0;
+    #   systemd-boot.configurationLimit = 5; # Keep last 5 generations
     # };
-    loader.grub.enable = true;
-    loader.grub.device = "/dev/vda";
-    loader.grub.useOSProber = true;
 
+    loader.grub = {
+      enable = true;
+      device = "/dev/vda";
+      useOSProber = true;
+    };
 
-    # tmp = {
-    #   useTmpfs = true;
-    #   tmpfsSize = "75%";
-    # };
-    initrd.verbose = false;
-    initrd.systemd.enable = true;
+    initrd = {
+      verbose = false;
+      systemd.enable = true;
+    };
     consoleLogLevel = 0;
     kernelParams = [
       "quiet"

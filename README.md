@@ -65,9 +65,7 @@
 - <https://github.com/moni-dz/nixpkgs-f2k/blob/master/overlays/window-managers.nixpkgs-f2k>
 - <https://github.com/NixOS/nixpkgs/blob/592047fc9e4f7b74a4dc85d1b9f5243dfe4899e3/pkgs/applications/window-managers/awesome/default.nix#L103>
 
-#weird mounting stuff
-
+## weird mounting stuff
 
 On VM:`mount -t 9p -o trans=virtio,version=9p2000.L,rw host_serve /mnt/flake`
 `sudo mount -t 9p -o trans=virtio my-share /mnt/shared`
-

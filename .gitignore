@@ -4,4 +4,5 @@
 
 # Nix results
 result
-clockwork.qcow2
+*.qcow2
+*.iso

@@ -1,4 +1,5 @@
-{ hostName, ... }: {
+{ hostName, ... }:
+{
   imports = [
     ./${hostName}
     ./boot.nix
@@ -6,27 +7,31 @@
 
     ./qt
 
-    ./descktopManager.nix
+    ./displayManager.nix
 
-    # ./bluetooth.nix
+    ./bluetooth.nix
     ./environment.nix
-    # ./firefox.nix
+    ./firefox.nix
     ./fonts.nix
+    ./fuzzel.nix
     # ./gaming.nix
     ./git.nix
     ./gpg.nix
     ./htop.nix
+    ./inhibridge.nix
     ./networking.nix
     ./nix.nix
     ./nvd.nix
     # ./openrazer.nix
-    # ./pipewire.nix
+    ./pipewire.nix
     ./pkgs.nix
     ./regional.nix
+    ./session-lock.nix
     ./sway.nix
-    # ./transmission.nix
+    ./swayidle.nix
     ./v4l2loopback.nix
     ./virtualisation.nix
+    ./wlogout.nix
   ];
   nixpkgs.config.allowUnfree = true;
   services.openssh = {
@@ -34,11 +39,9 @@
     ports = [ 22 ];
     settings = {
       PasswordAuthentication = true;
-      AllowUsers =
-        null; # Allows all users by default. Can be [ "user1" "user2" ]
+      AllowUsers = null; # Allows all users by default. Can be [ "user1" "user2" ]
       UseDns = true;
-      PermitRootLogin =
-        "prohibit-password"; # "yes", "without-password", "prohibit-password", "forced-commands-only", "no"
+      PermitRootLogin = "prohibit-password"; # "yes", "without-password", "prohibit-password", "forced-commands-only", "no"
     };
   };
 }

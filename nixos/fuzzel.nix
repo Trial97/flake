@@ -1,0 +1,31 @@
+{
+  config,
+  lib,
+  ...
+}:
+{
+  hm = {
+    catppuccin.fuzzel = {
+      enable = true;
+      accent = "peach";
+    };
+    programs.fuzzel = {
+      enable = true;
+
+      settings = {
+        main = {
+          font = "Monocraft:size=13";
+          inherit (config.hm.wayland.windowManager.sway.config) terminal;
+          # launch-prefix = "uwsm app --";
+          launch-prefix = "app2unit --fuzzel-compat --";
+        };
+        border = {
+          width = 2;
+          radius = 12;
+        };
+      };
+    };
+
+    wayland.windowManager.sway.config.menu = lib.getExe config.hm.programs.fuzzel.package;
+  };
+}
