@@ -53,5 +53,7 @@ exec qemu-system-x86_64 -machine accel=kvm:tcg -cpu max \
     -device virtio-keyboard \
     -usb \
     -device usb-tablet,bus=usb-bus.0 \
+    -netdev user,id=user.1,hostfwd=tcp::2223-:22 \
+    -device virtio-net-pci,netdev=user.1 \
     $QEMU_OPTS \
     "$@"

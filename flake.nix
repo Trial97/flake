@@ -196,6 +196,10 @@
       url = "github:Vladimir-csp/app2unit";
       flake = false;
     };
+    inhibridge = {
+      url = "git+https://codeberg.org/Scrumplex/inhibridge.git";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
 }

@@ -7,6 +7,7 @@
   ...
 }:
 let
+  inherit (lib) mkDefault;
   inherit (lib.lists) optional;
   inherit (lib.modules) mkAliasOptionModule;
 
@@ -53,7 +54,7 @@ in
       programs.home-manager.enable = true;
       systemd.user.startServices = "sd-switch";
 
-      catppuccin.flavor = "mocha";
+      catppuccin.flavor = mkDefault "mocha";
       catppuccin.enable = true;
     };
 
@@ -62,7 +63,7 @@ in
       useUserPackages = true;
       extraSpecialArgs = { inherit inputs; };
       sharedModules = [
-        catppuccin.homeManagerModules.catppuccin
+        catppuccin.homeModules.catppuccin
       ];
     };
 

@@ -56,7 +56,8 @@ in
       inherit (config.programs.sway) package;
       systemd.enable = false;
       config = {
-        terminal = "uwsm app -T";
+        # terminal = "uwsm app -T";
+        terminal = "app2unit kitty";
         startup = [ { command = "uwsm finalize"; } ];
         modifier = "Mod1";
 
@@ -189,7 +190,7 @@ in
     waylandCompositors.sway = {
       prettyName = "Sway";
       comment = "Sway with systemd";
-      binPath = (getExe config.hm.wayland.windowManager.sway.package) + " &>> /home/trial/log.txt";
+      binPath = getExe config.hm.wayland.windowManager.sway.package;
     };
   };
   systemd.user.targets.nixos-fake-graphical-session.enable = false;

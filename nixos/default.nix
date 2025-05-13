@@ -13,10 +13,12 @@
     ./environment.nix
     ./firefox.nix
     ./fonts.nix
+    ./fuzzel.nix
     # ./gaming.nix
     ./git.nix
     ./gpg.nix
     ./htop.nix
+    ./inhibridge.nix
     ./networking.nix
     ./nix.nix
     ./nvd.nix
@@ -24,9 +26,12 @@
     ./pipewire.nix
     ./pkgs.nix
     ./regional.nix
+    ./session-lock.nix
     ./sway.nix
+    ./swayidle.nix
     ./v4l2loopback.nix
     ./virtualisation.nix
+    ./wlogout.nix
   ];
   nixpkgs.config.allowUnfree = true;
   services.openssh = {
