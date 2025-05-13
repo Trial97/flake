@@ -4,11 +4,8 @@
   ...
 }:
 let
-  inherit (builtins) substring;
   inherit (lib) types;
-  inherit (lib.modules) mkIf mkMerge;
   inherit (lib.options) mkEnableOption mkOption;
-  inherit (lib.strings) toUpper;
 
   cfg = config.theme;
 

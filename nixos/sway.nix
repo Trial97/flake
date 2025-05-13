@@ -102,7 +102,7 @@ in
           let
             swayConf = config.hm.wayland.windowManager.sway.config;
             # TODO; role
-            wobSock = "$XDG_RUNTIME_DIR/wob.sock";
+            # wobSock = "$XDG_RUNTIME_DIR/wob.sock";
 
             mod = swayConf.modifier;
 

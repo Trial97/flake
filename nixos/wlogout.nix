@@ -9,7 +9,7 @@
     enable = true;
     layout =
       let
-        inherit (lib) getExe getExe';
+        inherit (lib) getExe';
         swaymsg = getExe' config.hm.wayland.windowManager.sway.package "swaymsg";
         systemctl = getExe' pkgs.systemd "systemctl";
         loginctl = getExe' pkgs.systemd "loginctl";

@@ -1,6 +1,7 @@
-{ inputs, ... }:
-let inherit (inputs) nixos-hardware;
-in {
+{ ... }:
+# { inputs, ... }:
+# let inherit (inputs) nixos-hardware;in
+{
   imports = [
     ./hardware-configuration.nix
     # nixos-hardware.nixosModules.msi-gl62
