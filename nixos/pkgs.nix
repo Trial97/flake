@@ -5,98 +5,71 @@
 {
 
   environment.systemPackages = with pkgs; [
-    nload
+    # qpwgraph
+    # virt-manager
+    # bottles
 
+    # inkscape-with-extensions
+    # gimp
+    # krita
+    # tenacity
+    # libreoffice-fresh
+    # wl-clipboard
+    # pulsemixer
+    # xdg-user-dirs
+    # xdg-utils
+    # nload
     kitty
-    foot
-    sway
-
-    #   pciutils
-    #   usbutils
-
-    #   neovim
-    #   kitty
-    #   input-leap
-    #   git
-    #   xdg-user-dirs
-    #   lxqt.lxqt-powermanagement
-    #   lxqt.lxqt-policykit
-    #   gnome-keyring
-
-    #   clipman
-    #   vlc
-    #   sublime-merge
-    #   firefox
-
-    #   # this are specific for x server
-    #   rofi
-    #   maim # screenshot
-    #   numlockx
-    #   caffeine-ng
-    #   arandr
-    #   dex
-
-    #   meld
-
-    #   fd
-    #   file
-    #   libqalculate
-    #   parallel
-    #   ripgrep
-    #   tree
-    #   just
-
-    #   dig
-    #   ffmpeg
-    #   psmisc
-    #   unzip
-
-    #   lsof
-    #   ntfs3g
-    #   playerctl
-    #   papirus-icon-theme
-
-    #   cmus
-    #   gdb
-    #   polychromatic
-
-    #   mpv
-    #   vlc
-    #   unrar
-    #   unzip
-
-    #   yt-dlp
-    #   mediainfo
-    #   atool
-    #   fzf
-    #   highlight
-    #   moreutils
-    #   mpd
-    #   mpc-cli
-    #   fd
-    #   most
-    #   jq
-    #   ripgrep
-    #   ripgrep-all
-    #   thunderbird-bin
-    #   transmission-qt
-    #   hexchat
-    #   gimp
-    #   thunderbird-bin
-    #   gthumb
-    #   progress
-    #   bat
-    #   man-pages
-    #   man-pages-posix
-    #   ninja
-    #   clang-tools
-    #   qtcreator
-    #   qt6.qttools
-    #   qt6.qtbase
-    #   qt6.qtsvg
-    #   qt6.full
-    #   virtualbox
-    #   ark
+    # neovim
+    # input-leap
+    # git
+    # lxqt.lxqt-powermanagement
+    # lxqt.lxqt-policykit
+    # gnome-keyring
+    # clipman
+    # sublime-merge
+    # meld
+    # tree
+    # just
+    # ffmpeg
+    # lsof
+    # ntfs3g
+    # playerctl
+    # cmus
+    # gdb
+    # polychromatic
+    # mpv
+    # vlc
+    # unrar
+    # unzip
+    # yt-dlp
+    # mediainfo
+    # atool
+    # fzf
+    # moreutils
+    # mpd
+    # mpc-cli
+    # fd
+    # most
+    # jq
+    # ripgrep
+    # ripgrep-all
+    # hexchat
+    # thunderbird-bin
+    # gthumb
+    # progress
+    # bat
+    # man-pages
+    # man-pages-posix
+    # ninja
+    # clang-tools
+    # qtcreator
+    # qt6.qttools
+    # qt6.qtbase
+    # qt6.qtsvg
+    # qt6.full
+    # virtualbox
+    # ark
   ];
 
   services = {
@@ -119,6 +92,10 @@
 
     dconf.enable = true;
     ccache.enable = true;
+    appimage = {
+      enable = true;
+      binfmt = true;
+    };
   };
   hm.programs = {
     eza = {

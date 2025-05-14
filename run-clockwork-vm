@@ -23,7 +23,7 @@ NIX_DISK_IMAGE=$(readlink -f "${NIX_DISK_IMAGE:-./clockwork.qcow2}") || test -z 
 if test -n "$NIX_DISK_IMAGE" && ! test -e "$NIX_DISK_IMAGE"; then
     echo "Disk image do not exist, creating the virtualisation disk image..."
 
-    createEmptyFilesystemImage "$NIX_DISK_IMAGE" "52240M"
+    createEmptyFilesystemImage "$NIX_DISK_IMAGE" "62240M"
 
     echo "Virtualisation disk image created."
 fi

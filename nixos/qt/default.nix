@@ -18,15 +18,13 @@ in
   ];
 
   hm = {
-    services.gpg-agent.pinentryPackage = pkgs.pinentry-qt;
+    services.gpg-agent.pinentry.package = pkgs.pinentry-qt;
 
     xdg.configFile = {
-      "qt5ct/qt5ct.conf".source = pkgs.substituteAll {
-        src = ./qt5ct.conf;
+      "qt5ct/qt5ct.conf".source = pkgs.replaceVars ./qt5ct.conf {
         themePath = qt5ctThemePath;
       };
-      "qt6ct/qt6ct.conf".source = pkgs.substituteAll {
-        src = ./qt6ct.conf;
+      "qt6ct/qt6ct.conf".source = pkgs.replaceVars ./qt6ct.conf {
         themePath = qt5ctThemePath;
       };
     };

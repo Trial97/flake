@@ -102,36 +102,36 @@ in
           let
             swayConf = config.hm.wayland.windowManager.sway.config;
             # TODO; role
-            # wobSock = "$XDG_RUNTIME_DIR/wob.sock";
+            wobSock = "$XDG_RUNTIME_DIR/wob.sock";
 
             mod = swayConf.modifier;
 
+            mpc = getExe pkgs.mpc-cli;
+            pamixer = getExe pkgs.pamixer;
+            sed = getExe pkgs.gnused;
+            brightnessctl = getExe pkgs.brightnessctl;
           in
-          # mpc = getExe pkgs.mpc-cli;
-          # pamixer = getExe pkgs.pamixer;
-          # sed = getExe pkgs.gnused;
-          # brightnessctl = getExe pkgs.brightnessctl;
           lib.mkMerge (
             [
               (mkExec "${mod}+Return" swayConf.terminal)
               (mkExec "${mod}+d" swayConf.menu)
               (mkExec "${mod}+Ctrl+q" "loginctl lock-session")
               # TODO: role
-              # (mkExec "XF86AudioStop" "${mpc} stop")
-              # (mkExec "XF86AudioPlay" "${mpc} toggle")
-              # (mkExec "XF86AudioPause" "${mpc} toggle")
-              # (mkExec "XF86AudioNext" "${mpc} next")
-              # (mkExec "XF86AudioPrev" "${mpc} prev")
+              (mkExec "XF86AudioStop" "${mpc} stop")
+              (mkExec "XF86AudioPlay" "${mpc} toggle")
+              (mkExec "XF86AudioPause" "${mpc} toggle")
+              (mkExec "XF86AudioNext" "${mpc} next")
+              (mkExec "XF86AudioPrev" "${mpc} prev")
               # # TODO: role
-              # (mkExec "XF86AudioMute" "${pamixer} -t && ${pamixer} --get-volume > ${wobSock}")
-              # (mkExec "XF86AudioRaiseVolume" "${pamixer} -ui 2 && ${pamixer} --get-volume > ${wobSock}")
-              # (mkExec "XF86AudioLowerVolume" "${pamixer} -ud 2 && ${pamixer} --get-volume > ${wobSock}")
+              (mkExec "XF86AudioMute" "${pamixer} -t && ${pamixer} --get-volume > ${wobSock}")
+              (mkExec "XF86AudioRaiseVolume" "${pamixer} -ui 2 && ${pamixer} --get-volume > ${wobSock}")
+              (mkExec "XF86AudioLowerVolume" "${pamixer} -ud 2 && ${pamixer} --get-volume > ${wobSock}")
               # # TODO: role
-              # (mkExec "Shift+XF86AudioRaiseVolume" "${mpc} vol +2 && ${mpc} vol | ${sed} 's|n/a|0%|g;s/[^0-9]*//g' > ${wobSock}")
-              # (mkExec "Shift+XF86AudioLowerVolume" "${mpc} vol -2 && ${mpc} vol | ${sed} 's|n/a|0%|g;s/[^0-9]*//g' > ${wobSock}")
+              (mkExec "Shift+XF86AudioRaiseVolume" "${mpc} vol +2 && ${mpc} vol | ${sed} 's|n/a|0%|g;s/[^0-9]*//g' > ${wobSock}")
+              (mkExec "Shift+XF86AudioLowerVolume" "${mpc} vol -2 && ${mpc} vol | ${sed} 's|n/a|0%|g;s/[^0-9]*//g' > ${wobSock}")
               # # TODO: role
-              # (mkExec "XF86MonBrightnessDown" "${brightnessctl} set 5%- | ${sed} -En 's/.*\\(([0-9]+)%\\).*/\\1/p' > ${wobSock}")
-              # (mkExec "XF86MonBrightnessUp" "${brightnessctl} set 5%+ | ${sed} -En 's/.*\\(([0-9]+)%\\).*/\\1/p' > ${wobSock}")
+              (mkExec "XF86MonBrightnessDown" "${brightnessctl} set 5%- | ${sed} -En 's/.*\\(([0-9]+)%\\).*/\\1/p' > ${wobSock}")
+              (mkExec "XF86MonBrightnessUp" "${brightnessctl} set 5%+ | ${sed} -En 's/.*\\(([0-9]+)%\\).*/\\1/p' > ${wobSock}")
             ]
             ++ (map (mkWorkspaceKeys mod) [
               "1"

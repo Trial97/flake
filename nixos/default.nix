@@ -32,6 +32,15 @@
     ./v4l2loopback.nix
     ./virtualisation.nix
     ./wlogout.nix
+
+    ./image-viewer.nix
+    ./mako.nix
+    ./poweralertd.nix
+    ./screenshot-bash.nix
+    ./waybar.nix
+    ./wlsunset.nix
+    ./wob.nix
+
   ];
   nixpkgs.config.allowUnfree = true;
   services.openssh = {

@@ -29,7 +29,7 @@
   };
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/45ebacd0-90c9-42ac-8f84-5af5fddc72b2";
+    device = "/dev/disk/by-uuid/39f55718-a5de-4787-95e3-9ad195c379e5";
     fsType = "ext4";
   };
   fileSystems."/home/trial/flake" = {
@@ -42,7 +42,7 @@
     ];
   };
   swapDevices = [
-    { device = "/dev/disk/by-uuid/4fd4d214-ba2e-4f17-a90a-9384c76d41f4"; }
+    { device = "/dev/disk/by-uuid/f0875639-cf2a-46c3-a27e-b4b4d0f5c878"; }
   ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
@@ -50,6 +50,7 @@
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
+  # networking.interfaces.ens10.useDHCP = lib.mkDefault true;
   # networking.interfaces.ens3.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

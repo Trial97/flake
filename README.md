@@ -69,3 +69,7 @@
 
 On VM:`mount -t 9p -o trans=virtio,version=9p2000.L,rw host_serve /mnt/flake`
 `sudo mount -t 9p -o trans=virtio my-share /mnt/shared`
+
+## Todo
+
+- swaylock with clock
