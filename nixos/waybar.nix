@@ -11,22 +11,22 @@ in
 {
   hm.programs.waybar = {
     enable = true;
-    extraModules = {
-      cameraBlank = {
-        blanked.label = "󱜷";
-        unblanked.label = "󰖠";
-      };
-      paMute = {
-        enable = lib.mkDefault true;
-        muted.label = "󰍭";
-        unmuted.label = "󰍬";
-      };
-    };
+    # extraModules = {
+    #   cameraBlank = {
+    #     blanked.label = "󱜷";
+    #     unblanked.label = "󰖠";
+    #   };
+    #   paMute = {
+    #     enable = lib.mkDefault true;
+    #     muted.label = "󰍭";
+    #     unmuted.label = "󰍬";
+    #   };
+    # };
     settings =
       let
-        termapp = "${pkgs.termapp}/bin/termapp";
-        run-or-raise = lib.getExe pkgs.run-or-raise;
       in
+      # termapp = "${pkgs.termapp}/bin/termapp";
+      # run-or-raise = lib.getExe pkgs.run-or-raise;
       {
         mainBar = {
           modules-left = [
@@ -44,8 +44,8 @@ in
               "battery"
               "backlight"
             ]
-            ++ lib.optional config.hm.programs.waybar.extraModules.paMute.enable "custom/${config.hm.programs.waybar.extraModules.paMute.moduleName}"
-            ++ lib.optional config.hm.programs.waybar.extraModules.cameraBlank.enable "custom/${config.hm.programs.waybar.extraModules.cameraBlank.moduleName}"
+            # ++ lib.optional config.hm.programs.waybar.extraModules.paMute.enable "custom/${config.hm.programs.waybar.extraModules.paMute.moduleName}"
+            # ++ lib.optional config.hm.programs.waybar.extraModules.cameraBlank.enable "custom/${config.hm.programs.waybar.extraModules.cameraBlank.moduleName}"
             ++ [
               "power-profiles-daemon"
               "idle_inhibitor"
@@ -76,7 +76,7 @@ in
             tooltip-format-disconnected = "MPD (disconnected)";
             on-scroll-up = "${pkgs.mpc-cli}/bin/mpc vol +2 > /dev/null && ${pkgs.mpc-cli}/bin/mpc vol | ${pkgs.gnused}/bin/sed 's|n/a|0%|g;s/[^0-9]*//g' > $XDG_RUNTIME_DIR/wob.sock";
             on-scroll-down = "${pkgs.mpc-cli}/bin/mpc vol -2 > /dev/null && ${pkgs.mpc-cli}/bin/mpc vol | ${pkgs.gnused}/bin/sed 's|n/a|0%|g;s/[^0-9]*//g' > $XDG_RUNTIME_DIR/wob.sock";
-            on-click = "uwsm app -- ${termapp} ${config.hm.programs.ncmpcpp.package}/bin/ncmpcpp";
+            # on-click = "uwsm app -- ${termapp} ${config.hm.programs.ncmpcpp.package}/bin/ncmpcpp";
             on-click-middle = "${pkgs.mpc-cli}/bin/mpc toggle";
             on-click-right = "";
             smooth-scrolling-threshold = 0.16;
@@ -89,7 +89,7 @@ in
             tooltip-format = "{ifname}";
             tooltip-format-wifi = "{essid} ({signalStrength}%) 󰖩";
             tooltip-format-disconnected = "Disconnected";
-            on-click = "uwsm app -- ${termapp} ${pkgs.nload}/bin/nload";
+            # on-click = "uwsm app -- ${termapp} ${pkgs.nload}/bin/nload";
             max-length = 50;
             interval = 1;
           };
@@ -106,7 +106,7 @@ in
               car = "󰄍";
               default = "󰕾";
             };
-            on-click = "uwsm app -- ${termapp} ${pkgs.pulsemixer}/bin/pulsemixer";
+            # on-click = "uwsm app -- ${termapp} ${pkgs.pulsemixer}/bin/pulsemixer";
             on-scroll-up = "${pkgs.pamixer}/bin/pamixer -ui 2 && ${pkgs.pamixer}/bin/pamixer --get-volume > $XDG_RUNTIME_DIR/wob.sock";
             on-scroll-down = "${pkgs.pamixer}/bin/pamixer -ud 2 && ${pkgs.pamixer}/bin/pamixer --get-volume > $XDG_RUNTIME_DIR/wob.sock";
             smooth-scrolling-threshold = 0.16;
@@ -132,7 +132,7 @@ in
               "󰁹"
             ];
             max-length = 25;
-            on-click = "uwsm app -- ${run-or-raise} powersupply ${lib.getExe pkgs.powersupply}";
+            # on-click = "uwsm app -- ${run-or-raise} powersupply ${lib.getExe pkgs.powersupply}";
           };
           backlight = {
             format = "{percent}% {icon}";
@@ -282,12 +282,12 @@ in
     Service.Slice = [ "app-graphical.slice" ];
   };
 
-  hm.wayland.windowManager.sway.config.keybindings = lib.mkMerge [
-    (lib.mkIf cfg.extraModules.cameraBlank.enable (
-      lib'.sway.mkExec "${config.hm.wayland.windowManager.sway.config.modifier}+n" cfg.extraModules.cameraBlank.onClickScript
-    ))
-    (lib.mkIf cfg.extraModules.paMute.enable (
-      lib'.sway.mkExec "${config.hm.wayland.windowManager.sway.config.modifier}+m" cfg.extraModules.paMute.onClickScript
-    ))
-  ];
+  # hm.wayland.windowManager.sway.config.keybindings = lib.mkMerge [
+  #   (lib.mkIf cfg.extraModules.cameraBlank.enable (
+  #     lib'.sway.mkExec "${config.hm.wayland.windowManager.sway.config.modifier}+n" cfg.extraModules.cameraBlank.onClickScript
+  #   ))
+  #   (lib.mkIf cfg.extraModules.paMute.enable (
+  #     lib'.sway.mkExec "${config.hm.wayland.windowManager.sway.config.modifier}+m" cfg.extraModules.paMute.onClickScript
+  #   ))
+  # ];
 }

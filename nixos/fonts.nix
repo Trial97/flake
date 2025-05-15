@@ -34,16 +34,5 @@
         monospace = [ "Fira Code" ];
       };
     };
-    symbols = {
-      enable = true;
-      fonts = [
-        "Fira Code"
-        "Fira Code,Fira Code Light"
-        "Fira Code,Fira Code Medium"
-        "Fira Code,Fira Code Retina"
-        "Fira Code,Fira Code SemiBold"
-        "Monocraft"
-      ];
-    };
   };
 }

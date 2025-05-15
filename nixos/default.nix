@@ -36,7 +36,7 @@
     ./image-viewer.nix
     ./mako.nix
     ./poweralertd.nix
-    ./screenshot-bash.nix
+    # ./screenshot-bash.nix
     ./waybar.nix
     ./wlsunset.nix
     ./wob.nix

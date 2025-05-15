@@ -46,14 +46,14 @@ in
   ];
 
   systemd.user.services."lxqt-policykit-agent" = {
-    description = "LXQt PolicyKit Agent";
-    after = [ "graphical-session.target" ];
-    wantedBy = [ "graphical-session.target" ];
+    Unit.Description = "LXQt PolicyKit Agent";
+    Service.ExecStart = getExe pkgs.lxqt.lxqt-policykit;
+    # Install.WantedBy = [ "graphical-session.target" ];
+    Install.after = [ "graphical-session.target" ];
+    Install.wantedBy = [ "graphical-session.target" ];
     serviceConfig = {
       ExecStart = lib.getExe pkgs.lxqt.lxqt-policykit;
       Slice = [ "background-graphical.slice" ];
     };
   };
-
-  hm.wayland.windowManager.sway.config.floating.criteria = [ { app_id = "lxqt-policykit-agent"; } ];
 }

@@ -5,11 +5,6 @@
   ...
 }:
 {
-  age.secrets."screenshot-bash" = {
-    file = ../../../secrets/common/screenshot-bash.age;
-    owner = "scrumplex";
-    inherit (config.users.users.scrumplex) group;
-  };
   hm = {
     xdg.configFile."screenshot-bash.conf".text =
       let
@@ -22,9 +17,6 @@
       ''
         #!/usr/bin/env bash
         TARGET_FILENAME="${config.hm.home.homeDirectory}/Pictures/Screenshots/$(date +%s)_$(${pwgen} 6).png"
-
-        TARGET_HOST="https://scrumplex.rocks"
-        BASIC_AUTH="$(cat ${config.age.secrets."screenshot-bash".path})"
 
         do_screenshot() {
             area=$(${swaymsg} -t get_tree | ${jq} -r '.. | select(.pid? and .visible?) | "\(.rect.x),\(.rect.y - .deco_rect.height) \(.rect.width)x\(.rect.height + .deco_rect.height)"' | ${slurp})
