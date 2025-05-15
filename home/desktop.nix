@@ -2,9 +2,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (lib) getExe;
-in {
+in
+{
   xdg = {
     enable = true;
     userDirs = {
@@ -15,7 +17,7 @@ in {
 
   home.pointerCursor = {
     name = "Adwaita";
-    package = pkgs.gnome.gnome-themes-extra;
+    package = pkgs.gnome-themes-extra;
     size = 1;
     gtk.enable = true;
     x11.enable = true;
@@ -52,6 +54,6 @@ in {
   systemd.user.services."lxqt-policykit-agent" = {
     Unit.Description = "LXQt PolicyKit Agent";
     Service.ExecStart = getExe pkgs.lxqt.lxqt-policykit;
-    Install.WantedBy = ["graphical-session.target"];
+    Install.WantedBy = [ "graphical-session.target" ];
   };
 }

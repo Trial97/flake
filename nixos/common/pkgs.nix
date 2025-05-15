@@ -5,13 +5,12 @@
   inputs,
   system,
   ...
-}: let
+}:
+let
   inherit (lib.modules) mkDefault;
   extensions = inputs.nix-vscode-extensions.extensions.${system};
-in {
-  nixpkgs = {
-    config.allowUnfree = true;
-  };
+in
+{
 
   environment.systemPackages = with pkgs; [
     nload
@@ -26,7 +25,7 @@ in {
     xdg-user-dirs
     lxqt.lxqt-powermanagement
     lxqt.lxqt-policykit
-    gnome.gnome-keyring
+    gnome-keyring
 
     clipman
     vlc
@@ -84,7 +83,6 @@ in {
     ripgrep
     ripgrep-all
     thunderbird-bin
-    transmission-qt
     # hexchat
     gimp
     thunderbird-bin
@@ -181,8 +179,8 @@ in {
   virtualisation.podman = {
     enable = mkDefault true;
     dockerSocket.enable = true;
-    enableNvidia = lib.mkDefault (builtins.elem "nvidia" (config.services.xserver.videoDrivers or []));
-    extraPackages = with pkgs; [podman-compose];
+    enableNvidia = lib.mkDefault (builtins.elem "nvidia" (config.services.xserver.videoDrivers or [ ]));
+    extraPackages = with pkgs; [ podman-compose ];
     autoPrune.enable = true;
   };
 
@@ -202,7 +200,7 @@ in {
   hm.programs = {
     eza = {
       enable = true;
-      icons = true;
+      icons = "auto";
 
       extraOptions = [
         "--group"
@@ -224,15 +222,15 @@ in {
 
   security.sudo.extraRules = [
     {
-      groups = ["wheel"];
+      groups = [ "wheel" ];
       commands = [
         {
           command = "/run/current-system/sw/bin/nixos-rebuild";
-          options = ["NOPASSWD"];
+          options = [ "NOPASSWD" ];
         }
         {
           command = "/run/current-system/sw/bin/systemctl";
-          options = ["NOPASSWD"];
+          options = [ "NOPASSWD" ];
         }
       ];
     }

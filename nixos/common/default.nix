@@ -1,6 +1,6 @@
-{windowManager, ...}: {
+_: {
   imports = [
-    ./${windowManager}
+    ./awesome
 
     ./bluetooth.nix
     ./boot.nix
@@ -17,10 +17,9 @@
     ./nvd.nix
     ./openrazer.nix
     ./pkgs.nix
-    ./pipewire
+    ./pipewire.nix
     ./qt
     ./regional.nix
-    # ./transmission.nix
     ./v4l2loopback.nix
   ];
 }

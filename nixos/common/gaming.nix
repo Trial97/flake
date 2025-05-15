@@ -2,12 +2,13 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   environment.systemPackages = with pkgs; [
     # dolphinEmu
     prismlauncher
     r2modman
-    yuzu-early-access
+    # yuzu-early-access
 
     protontricks
   ];

@@ -2,9 +2,11 @@
   inputs,
   pkgs,
   ...
-}: let
+}:
+let
   qt5ctThemePath = "${inputs.catppuccin-qt5ct}/themes/Catppuccin-Mocha.conf";
-in {
+in
+{
   qt = {
     enable = true;
     platformTheme = "qt5ct";
@@ -16,15 +18,13 @@ in {
   ];
 
   hm = {
-    services.gpg-agent.pinentryFlavor = "qt";
+    services.gpg-agent.pinentry.package = pkgs.pinentry-qt;
 
     xdg.configFile = {
-      "qt5ct/qt5ct.conf".source = pkgs.substituteAll {
-        src = ./qt5ct.conf;
+      "qt5ct/qt5ct.conf".source = pkgs.replaceVars ./qt5ct.conf {
         themePath = qt5ctThemePath;
       };
-      "qt6ct/qt6ct.conf".source = pkgs.substituteAll {
-        src = ./qt6ct.conf;
+      "qt6ct/qt6ct.conf".source = pkgs.replaceVars ./qt6ct.conf {
         themePath = qt5ctThemePath;
       };
     };

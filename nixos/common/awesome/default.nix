@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   nixpkgs = {
     # You can add overlays here
     overlays = [
@@ -17,8 +18,7 @@
   environment = {
     systemPackages =
       lib.attrValues {
-        inherit
-          (pkgs)
+        inherit (pkgs)
           brightnessctl
           inotify-tools
           libnotify
@@ -66,11 +66,12 @@
     tumbler.enable = true;
     upower.enable = true;
 
+    displayManager.defaultSession = "none+awesome";
+
     xserver = {
       enable = true;
 
       displayManager = {
-        defaultSession = "none+awesome";
 
         lightdm = {
           enable = true;
@@ -84,7 +85,12 @@
           enable = true;
 
           luaModules = lib.attrValues {
-            inherit (pkgs.luajitPackages) lgi ldbus luadbi-mysql luaposix;
+            inherit (pkgs.luajitPackages)
+              lgi
+              ldbus
+              luadbi-mysql
+              luaposix
+              ;
           };
         };
       };
@@ -94,8 +100,18 @@
 
   systemd.services."screen_lock@.service" = {
     description = "Autolock screen before sleep, hibernate and hybrid-sleep";
-    before = ["sleep.target" "suspend.target" "hibernate.target" "hybrid-sleep.target"];
-    wantedBy = ["sleep.target" "suspend.target" "hibernate.target" "hybrid-sleep.target"];
+    before = [
+      "sleep.target"
+      "suspend.target"
+      "hibernate.target"
+      "hybrid-sleep.target"
+    ];
+    wantedBy = [
+      "sleep.target"
+      "suspend.target"
+      "hibernate.target"
+      "hybrid-sleep.target"
+    ];
     serviceConfig = {
       User = "%i";
       Type = "forking";

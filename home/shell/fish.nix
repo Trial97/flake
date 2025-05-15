@@ -1,12 +1,12 @@
 {
-  config,
   lib,
   pkgs,
   ...
-}: {
+}:
+{
+  catppuccin.fish.enable = true;
   programs.fish = {
     enable = true;
-    catppuccin.enable = true;
 
     shellInit = ''
       set -g theme_color_scheme "catppuccin"
@@ -48,17 +48,6 @@
         inherit (z) src;
       }
     ];
-
-    # interactiveShellInit = ''
-    #   set -l nixfile ${config.home.homeDirectory}/.nix-profile/etc/profile.d/nix.fish
-    #   if test -e $nixfile
-    #   	source $nixfile
-    #   end
-
-    #   ${lib.getExe pkgs.nix-your-shell} fish | source
-
-    #   abbr -a !! --position anywhere --function last_history_item
-    # '';
 
     functions = {
       systemctl = ''

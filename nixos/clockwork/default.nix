@@ -5,9 +5,15 @@
   config,
   pkgs,
   ...
-}: {
+}:
+# { inputs, ... }:
+# let inherit (inputs) nixos-hardware;in
+{
   # Include the results of the hardware scan.
-  imports = [./hardware-configuration.nix];
+  imports = [
+    ./hardware-configuration.nix
+    # nixos-hardware.nixosModules.msi-gl62
+  ];
 
   hardware.enableRedistributableFirmware = true;
   powerManagement.cpuFreqGovernor = "powersave";
@@ -21,16 +27,16 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
-  fileSystems."/mnt/Computer2" = {
-    device = "/dev/sda1";
-    fsType = "ntfs3";
-  };
+  # fileSystems."/mnt/Computer2" = {
+  #   device = "/dev/sda1";
+  #   fsType = "ntfs3";
+  # };
 
   xdg.portal = {
     enable = true;
     # wlr.enable = true;
-    extraPortals = [pkgs.xdg-desktop-portal-gtk];
-    configPackages = [pkgs.xdg-desktop-portal-gtk];
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    configPackages = [ pkgs.xdg-desktop-portal-gtk ];
   };
 
   services = {
@@ -55,7 +61,7 @@
     enable = true;
 
     qemu = {
-      ovmf.packages = [pkgs.OVMFFull.fd];
+      ovmf.packages = [ pkgs.OVMFFull.fd ];
       swtpm.enable = true;
     };
   };
@@ -69,20 +75,12 @@
   # services.xserver.desktopManager.xfce.enable = false;
 
   # Configure keymap in X11
-  services.xserver = {
+  services.xserver.xkb = {
     layout = "us";
-    xkbVariant = "";
+    variant = "";
   };
 
   services.fstrim.enable = true;
 
   environment.localBinInPath = true;
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.11"; # Did you read the comment?
 }
