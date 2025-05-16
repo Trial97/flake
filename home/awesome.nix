@@ -8,7 +8,7 @@
     source = pkgs.fetchgit {
       url = "https://github.com/Trial97/awesomerc.git";
       fetchSubmodules = true;
-      hash = "sha256-AjL9sxbKwCe3wdE0INX1dxpV1DdnLFPtARJCWr4dNi0=";
+      hash = "sha256-2AVdIilvLag5LHrFNpWh5Kt5il2xmqek/CLth2JCwF4";
     };
     recursive = true;
   };

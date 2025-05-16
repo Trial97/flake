@@ -14,7 +14,6 @@ in
       experimental-features = [
         "nix-command"
         "flakes"
-        "repl-flake"
         "no-url-literals"
         "auto-allocate-uids"
       ];

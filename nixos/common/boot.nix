@@ -10,10 +10,16 @@ in
   boot = {
     kernelPackages = mkDefault pkgs.linuxKernel.packages.linux_zen;
 
-    loader = {
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
-      timeout = 0;
+    # loader = {
+    #   systemd-boot.enable = true;
+    #   efi.canTouchEfiVariables = true;
+    #   timeout = 0;
+    # };
+
+    loader.grub = {
+      enable = true;
+      device = "/dev/vda";
+      useOSProber = true;
     };
 
     tmp = {

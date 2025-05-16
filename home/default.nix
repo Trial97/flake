@@ -1,19 +1,4 @@
-{
-  config,
-  ...
-}:
-let
-  imp =
-    if config.services.xserver.windowManager.awesome.enable then
-      [
-        ./awesome.nix
-        ./rofi.nix
-        ./autorandr.nix
-      ]
-    else
-      [ ];
-in
-{
+_: {
   hm.imports = [
     ./cava.nix
     ./cmus.nix
@@ -23,5 +8,8 @@ in
     ./ranger.nix
     ./shell
     ./wallpapers.nix
-  ] ++ imp;
+    ./awesome.nix
+    ./rofi.nix
+    ./autorandr.nix
+  ];
 }

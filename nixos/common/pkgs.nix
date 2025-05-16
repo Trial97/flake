@@ -18,7 +18,7 @@ in
 
     neovim
     kitty
-    input-leap
+    # input-leap
     git
     xdg-user-dirs
     lxqt.lxqt-powermanagement

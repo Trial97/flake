@@ -66,6 +66,7 @@ in
       sharedModules = [
         catppuccin.homeModules.catppuccin
       ];
+      backupFileExtension = "backup";
     };
   };
 }
