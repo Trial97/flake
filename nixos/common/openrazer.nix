@@ -2,9 +2,10 @@
   username,
   pkgs,
   ...
-}: {
+}:
+{
   hardware.openrazer = {
-    users = [username];
+    users = [ username ];
     enable = true;
   };
   services.hardware.openrgb.enable = false;

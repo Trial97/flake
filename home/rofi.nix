@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   xdg.configFile."rofi2".source = ../dotfiles/rofi2;
   xdg.configFile."rofi" = {
     source =

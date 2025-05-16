@@ -1,10 +1,9 @@
-#! /nix/store/11ciq72n4fdv8rw6wgjgasfv4mjs1jrw-bash-5.2p37/bin/bash
+#! /usr/bin/env bash
 
-export PATH=/nix/store/fr9yr63a1267cr0r86w18c77mh3xavcc-coreutils-9.6/bin${PATH:+:}$PATH
+set -ex
 
-set -e
-
-ISO_PATH=/home/trial/Downloads/nixos-plasma6-24.11.714826.04ef94c4c158-x86_64-linux.iso
+ISO_PATH=$(ls ./*.iso | head -n 1)
+ISO_PATH=$(realpath "${ISO_PATH}")
 
 # Create an empty ext4 filesystem image. A filesystem image does not
 # contain a partition table but just a filesystem.
@@ -12,18 +11,19 @@ createEmptyFilesystemImage() {
     local name=$1
     local size=$2
     local temp=$(mktemp)
-    /nix/store/wkib4zpjcx9c6mlnkd0nvnlpg16fh13s-qemu-host-cpu-only-9.2.0/bin/qemu-img create -f raw "$temp" "$size"
-    /nix/store/5x1yk8w639ng2raqiagjgllps2xi1d96-e2fsprogs-1.47.2-bin/bin/mkfs.ext4 -L nixos "$temp"
-    /nix/store/wkib4zpjcx9c6mlnkd0nvnlpg16fh13s-qemu-host-cpu-only-9.2.0/bin/qemu-img convert -f raw -O qcow2 "$temp" "$name"
+    qemu-img create -f raw "$temp" "$size"
+    mkfs.ext4 -L nixos "$temp"
+    qemu-img convert -f raw -O qcow2 "$temp" "$name"
     rm "$temp"
 }
 
 NIX_DISK_IMAGE=$(readlink -f "${NIX_DISK_IMAGE:-/mnt/Clockwork/VirtualBoxes/clockwork.qcow2}") || test -z "$NIX_DISK_IMAGE"
+NIX_DISK_IMAGE=$(readlink -f "${NIX_DISK_IMAGE:-./clockwork.qcow2}") || test -z "$NIX_DISK_IMAGE"
 
 if test -n "$NIX_DISK_IMAGE" && ! test -e "$NIX_DISK_IMAGE"; then
     echo "Disk image do not exist, creating the virtualisation disk image..."
 
-    createEmptyFilesystemImage "$NIX_DISK_IMAGE" "52240M"
+    createEmptyFilesystemImage "$NIX_DISK_IMAGE" "62240M"
 
     echo "Virtualisation disk image created."
 fi
@@ -39,7 +39,7 @@ mkdir -p "$TMPDIR/xchg"
 cd "$TMPDIR"
 
 # Start QEMU.
-exec /nix/store/wkib4zpjcx9c6mlnkd0nvnlpg16fh13s-qemu-host-cpu-only-9.2.0/bin/qemu-system-x86_64 -machine accel=kvm:tcg -cpu max \
+exec qemu-system-x86_64 -machine accel=kvm:tcg -cpu max \
     -name clockwork \
     -m 2048 \
     -smp 2 \
@@ -53,10 +53,7 @@ exec /nix/store/wkib4zpjcx9c6mlnkd0nvnlpg16fh13s-qemu-host-cpu-only-9.2.0/bin/qe
     -device virtio-keyboard \
     -usb \
     -device usb-tablet,bus=usb-bus.0 \
-    \
-    \
-    \
+    -netdev user,id=user.1,hostfwd=tcp::2223-:22 \
+    -device virtio-net-pci,netdev=user.1 \
     $QEMU_OPTS \
-    "$@" # -kernel ${NIXPKGS_QEMU_KERNEL_clockwork:-/nix/store/74f8im34y5j13ji2lbl82ihlzbhbv3yj-nixos-system-clockwork-25.05.20250224.0196c01/kernel} \
-# -initrd /nix/store/0kwmf4fpzmw3iv6xcjvcpsd0clk2d9r7-initrd-linux-zen-6.13.3/initrd \
-# -append "$(cat /nix/store/74f8im34y5j13ji2lbl82ihlzbhbv3yj-nixos-system-clockwork-25.05.20250224.0196c01/kernel-params) init=/nix/store/74f8im34y5j13ji2lbl82ihlzbhbv3yj-nixos-system-clockwork-25.05.20250224.0196c01/init regInfo=/nix/store/71iwb19klpsxxyyksqx28waq91wzn337-closure-info/registration console=ttyS0,115200n8 console=tty0 $QEMU_KERNEL_PARAMS" \
+    "$@"

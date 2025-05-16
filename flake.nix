@@ -112,7 +112,14 @@
               actionlint.enable = true;
               statix.enable = true;
               deadnix.enable = true;
-              typos.enable = true;
+              typos = {
+                enable = true;
+                excludes = [
+                  "flake.lock"
+                  ".+.frag"
+                  ".+.svg"
+                ];
+              };
               markdownlint.enable = true;
             };
           };
@@ -173,6 +180,15 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
 
+    nixpkgs-fmt = {
+      url = "github:nix-community/nixpkgs-fmt";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    emacs = {
+      url = "github:nix-community/emacs-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     flake-compat = {
       url = "github:edolstra/flake-compat";
       flake = false;
@@ -211,9 +227,15 @@
       flake = false;
     };
 
-    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+    nixpkgs-f2k = {
+      url = "github:moni-dz/nixpkgs-f2k";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        emacs.follows = "emacs";
+        nixpkgs-fmt.follows = "nixpkgs-fmt";
+      };
 
-    nixpkgs-f2k.url = "github:moni-dz/nixpkgs-f2k";
+    };
   };
 
 }

@@ -2,9 +2,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (lib.modules) mkDefault;
-in {
+in
+{
   boot = {
     kernelPackages = mkDefault pkgs.linuxKernel.packages.linux_zen;
 
@@ -21,7 +23,10 @@ in {
     initrd.verbose = false;
     initrd.systemd.enable = true;
     consoleLogLevel = 0;
-    kernelParams = ["quiet" "udev.log_level=3"];
+    kernelParams = [
+      "quiet"
+      "udev.log_level=3"
+    ];
 
     plymouth = {
       enable = mkDefault true;

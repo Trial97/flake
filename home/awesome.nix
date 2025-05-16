@@ -2,7 +2,8 @@
   pkgs,
   home,
   ...
-}: {
+}:
+{
   xdg.configFile."awesome" = {
     source = pkgs.fetchgit {
       url = "https://github.com/Trial97/awesomerc.git";

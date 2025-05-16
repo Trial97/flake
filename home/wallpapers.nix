@@ -1,8 +1,8 @@
 {
   pkgs,
-  home,
   ...
-}: {
+}:
+{
   xdg.configFile."wallpaper" = {
     source = pkgs.fetchgit {
       url = "https://github.com/Trial97/wallpapers.git";

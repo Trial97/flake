@@ -4,7 +4,7 @@
 
 - [x] fix awesome config
 - [x] fix picom setup
-- [x] create a wallpapaers repo
+- [x] create a wallpapers repo
 - [x] setup env
 - [x] setup shell
 - [x] ftrim enable

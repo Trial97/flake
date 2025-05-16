@@ -2,14 +2,22 @@
   inputs,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkDefault;
   channelPath = "/etc/nix/channels/nixpkgs";
-in {
+in
+{
   nix = {
     settings = {
       auto-optimise-store = true;
-      experimental-features = ["nix-command" "flakes" "repl-flake" "no-url-literals" "auto-allocate-uids"];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+        "repl-flake"
+        "no-url-literals"
+        "auto-allocate-uids"
+      ];
       substituters = [
         "https://cache.nixos.org"
         "https://cache.garnix.io"
@@ -22,7 +30,10 @@ in {
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
       ];
-      trusted-users = ["root" "@wheel"];
+      trusted-users = [
+        "root"
+        "@wheel"
+      ];
     };
     gc = {
       automatic = true;
@@ -43,7 +54,7 @@ in {
     rtkit.enable = mkDefault true;
     sudo.execWheelOnly = true;
   };
-  primaryUser.extraGroups = ["rtkit"];
+  primaryUser.extraGroups = [ "rtkit" ];
 
   systemd.tmpfiles.rules = [
     "L+ ${channelPath}     - - - - ${inputs.nixpkgs.outPath}"

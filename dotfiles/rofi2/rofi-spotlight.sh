@@ -11,7 +11,7 @@ HIST_FILE="${MY_PATH}/history.txt"
 OPENER=xdg-open
 TERM_EMU=kitty
 TEXT_EDITOR=$EDITOR
-FILE_MANAGER=doplhin
+FILE_MANAGER=dolphin
 BLUETOOTH_SEND=blueman-sendto
 
 CUR_DIR=$PWD

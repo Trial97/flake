@@ -1,4 +1,5 @@
-{config, ...}: {
+{ config, ... }:
+{
   programs.gnupg.agent.enable = true;
   hm = {
     programs.git.signing = {

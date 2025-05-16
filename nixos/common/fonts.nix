@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   fonts = {
     packages = with pkgs; [
       noto-fonts-cjk-sans
@@ -8,7 +9,7 @@
       roboto
       corefonts
       fira-code
-      (nerdfonts.override {fonts = ["FiraCode"];})
+      nerd-fonts.fira-code
       noto-fonts
       noto-fonts-extra
       noto-fonts-emoji
@@ -26,11 +27,11 @@
       enable = true;
       cache32Bit = true;
       defaultFonts = {
-        serif = ["Noto Serif"];
-        sansSerif = ["Fira Sans"];
+        serif = [ "Noto Serif" ];
+        sansSerif = [ "Fira Sans" ];
         # sansSerif = ["Noto Sans"];
-        emoji = ["Noto Color Emoji"];
-        monospace = ["Fira Code"];
+        emoji = [ "Noto Color Emoji" ];
+        monospace = [ "Fira Code" ];
       };
     };
 

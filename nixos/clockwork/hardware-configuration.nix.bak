@@ -2,47 +2,37 @@
 # and may be overwritten by future invocations.  Please make changes
 # to /etc/nixos/configuration.nix instead.
 {
+  config,
   lib,
+  pkgs,
   modulesPath,
   ...
-}:
-
-{
+}: {
   imports = [
-    (modulesPath + "/profiles/qemu-guest.nix")
+    (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
   boot = {
     initrd = {
-      availableKernelModules = [
-        "ata_piix"
-        "uhci_hcd"
-        "virtio_pci"
-        "floppy"
-        "sr_mod"
-        "virtio_blk"
-      ];
-      kernelModules = [ ];
+      availableKernelModules = ["xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" "rtsx_usb_sdmmc"];
+      kernelModules = [];
     };
-    kernelModules = [ "kvm-intel" ];
-    extraModulePackages = [ ];
+    kernelModules = ["kvm-intel"];
+    extraModulePackages = [];
   };
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/39f55718-a5de-4787-95e3-9ad195c379e5";
+    device = "/dev/disk/by-uuid/0e50582b-ccc7-4104-8ffd-62a69b93bdab";
     fsType = "ext4";
   };
-  fileSystems."/home/trial/flake" = {
-    device = "my-share";
-    fsType = "9p";
-    options = [
-      "trans=virtio"
-      "version=9p2000.L"
-      "cache=none"
-    ];
+
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/B39E-7EC2";
+    fsType = "vfat";
   };
+
   swapDevices = [
-    { device = "/dev/disk/by-uuid/f0875639-cf2a-46c3-a27e-b4b4d0f5c878"; }
+    {device = "/dev/disk/by-uuid/bb7de447-f301-472f-80b0-582972ef3125";}
   ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
@@ -50,8 +40,9 @@
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.ens10.useDHCP = lib.mkDefault true;
-  # networking.interfaces.ens3.useDHCP = lib.mkDefault true;
+  # networking.interfaces.enp3s0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.wlp2s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
